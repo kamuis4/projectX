@@ -29,7 +29,7 @@ jobs:
       - run: corepack enable
       - run: pnpm install --frozen-lockfile
       - run: pnpm db:generate
-      - run: pnpm db:push
+      - run: pnpm db:migrate
       - run: pnpm db:seed
       - run: pnpm typecheck
       - run: pnpm lint

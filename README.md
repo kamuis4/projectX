@@ -1,10 +1,12 @@
-# projectX — Spyfall Universe
+# projectX — Spyfall Universe V2
 
-Jeu web de déduction en français pour **3 à 12 joueurs**, réalisé à partir du cahier des charges Spyfall Universe (15 novembre 2026). Un mot pour les innocents, une catégorie pour les espions. Ce dépôt fournit un client React et un véritable serveur multijoueur Socket.IO.
+Jeu de déduction en français pour **3 à 12 participants**, avec jusqu’à **50 spectateurs**, chat temps réel et vocal Discord externe. React/Vite/Tailwind, Fastify/Socket.IO, TypeScript et PostgreSQL/Prisma facultatif.
 
-## Démarrer sans infrastructure
+La [comparaison détaillée V1 → V2](docs/COMPARAISON_V2.md) reprend chaque exigence de l’annexe du PDF, les changements, les décisions et les limites. La V2 prolonge le code de la branche `spyfall/mvp` ; elle ne nécessite aucun service Sites et n’effectue aucun déploiement public.
 
-Prérequis : **Node.js 22.19+**, Corepack et pnpm 11.25.0. Depuis la racine du dépôt :
+## Lancer en invité, sans infrastructure
+
+Prérequis : **Node.js 22.19+**, Corepack, pnpm 11.25.0.
 
 ```sh
 corepack enable
@@ -13,22 +15,20 @@ pnpm db:generate
 pnpm dev
 ```
 
-- Interface : <http://localhost:5173>
-- Serveur : <http://localhost:3001/api/health>
-- Aucun compte ni base de données n’est nécessaire pour jouer en invité.
-- Ouvrir trois **profils de navigateur distincts** (ou des navigateurs différents), choisir trois pseudos, créer un salon et partager son code/lien. Tous les joueurs doivent se déclarer prêts. Les onglets d’un même profil partagent la session ; un nouvel onglet remplace la connexion précédente.
-- Les comptes sont explicitement indisponibles tant que `DATABASE_URL` n’est pas configuré. Les boutons de jeu restent fonctionnels.
+Interface : <http://localhost:5173> ; API de santé : <http://localhost:3001/api/health>.
 
-Le serveur charge automatiquement le fichier `.env` à la racine s’il existe. Vite relaie `/api` et `/socket.io` vers le serveur ; aucun secret ni URL de base de données ne va dans le client.
+Ouvrir trois profils de navigateur distincts, choisir trois pseudos, créer un salon et partager son code/lien. Tous les participants doivent se déclarer prêts avant le lancement. Les onglets du même profil partagent la session et une seule connexion par identité est autorisée. Sans base de données, les comptes sont explicitement indisponibles et la bibliothèque privée fonctionne **en mémoire**.
 
-## Activer les comptes et la sauvegarde PostgreSQL
+Le serveur charge `.env` à la racine s’il existe. Vite relaie `/api` et `/socket.io` ; aucun secret de base de données ni banque de mots n’est embarqué dans le client.
+
+## PostgreSQL : installation neuve
 
 ```sh
 docker compose -f infra/docker-compose.yml up -d --wait
 cp .env.example .env
 ```
 
-Décommenter cette ligne dans `.env` :
+Décommenter dans `.env` :
 
 ```dotenv
 DATABASE_URL=postgresql://spyfall:spyfall_local@localhost:5432/spyfall
@@ -38,108 +38,160 @@ Puis :
 
 ```sh
 pnpm db:generate
-pnpm db:push
+pnpm db:migrate
 pnpm db:seed
 pnpm dev
 ```
 
-`db:push` convient à l’initialisation de cette V1. Pour une base de production existante, préparer et relire des migrations versionnées avant de modifier le schéma.
+Les migrations initialisent le schéma V1 puis ajoutent les champs et la bibliothèque V2. Le seed charge les 300 mots officiels avec leurs sous-catégories, difficultés et variantes.
 
-Inscription et connexion facultatives, mots de passe Argon2id, cookies HttpOnly/SameSite=Strict (Secure en production), déconnexion, consultation des statistiques récentes et suppression de compte. Les comptes sont associés aux joueurs **au moment de créer ou rejoindre** un salon : se connecter en cours de partie ne rattache pas rétroactivement une session invitée.
+### Mettre à jour une base V1 existante
 
-Les résultats terminés, rôles et scores sont enregistrés dans une transaction, avec une clé unique par manche/joueur et une opération idempotente par manche. Une erreur de sauvegarde est journalisée et retentée tant que le salon conserve ces résultats. Le score en cours de session est toujours calculé côté serveur.
+La V1 utilisait `db:push`, sans historique de migrations. Sauvegarder la base et vérifier qu’elle correspond bien au schéma V1 du commit `62ace0a` avant d’enregistrer cette baseline :
 
-## Parcours de jeu
+```sh
+pnpm db:baseline
+pnpm db:migrate
+pnpm db:generate
+pnpm db:seed
+```
 
-1. L’hôte crée un salon privé ; les amis rejoignent par code aléatoire de huit caractères (40 bits) ou lien.
-2. L’hôte règle les catégories, la difficulté, la durée (3/5/7/10 min), le mode et un éventuel lien d’invitation Discord.
-3. Tous se déclarent prêts ; démarrage à partir de 3 joueurs connectés (6 pour le double espion). Modifier les paramètres remet les statuts prêts à zéro.
-4. Révélation pendant 15 s. Chaque joueur affiche/masque sa carte personnelle ; seuls les innocents reçoivent le mot. L’hôte peut avancer cette phase.
-5. Discussion au chat ou sur Discord. Le serveur fixe l’échéance. L’hôte peut avancer au vote.
-6. Vote définitif, y compris pour soi-même, pendant 45 s maximum. Un vote par joueur actif et par bulletin. Égalité : second tour restreint aux ex æquo ; seconde égalité ou absence de suffrage : victoire des espions. L’accusation d’un innocent donne aussi la victoire aux espions.
-7. Un espion identifié dispose de 30 s et d’une seule proposition ; le chat est suspendu. Accents, ponctuation et casse sont ignorés, mais aucune correspondance partielle n’est acceptée. En double espion, une mauvaise réponse élimine cet espion puis lance un nouveau vote pour chercher l’autre. Les espions ne reçoivent pas l’identité de leur partenaire.
-8. Résultats : mot, rôles, gains et scores cumulés du salon. L’hôte retourne au lobby pour une revanche ; les identités et scores sont conservés.
+`db:baseline` marque uniquement le schéma initial comme déjà appliqué ; il ne doit être exécuté **qu’une fois sur une base V1 existante**, jamais sur une base vide. La migration V2 est additive : champs `Word.subcategory`, `Word.variants` et table `LibraryItem`. `db:push` reste disponible pour des bases de développement jetables ; les déploiements utilisent les migrations versionnées.
 
-**Scores :** innocent gagnant +100 ; espion survivant après l’échec des votes +200 ; espion ayant retrouvé le mot +150. Si un espion devine le mot, seul ce joueur gagne les 150 points ; son partenaire ne reçoit pas de bonus. Un espion déjà éliminé ne gagne pas de points de survie. Aucun bonus de participation.
+## Jeu, filtres et règles avancées
 
-### Connexion et départs
+- Créer/rejoindre un salon privé par code cryptographique de huit caractères ou lien. L’hôte peut expulser au lobby ; le rôle d’hôte est transféré automatiquement en cas de départ/déconnexion.
+- Durée de discussion : 3/5/7/10 min. Un, deux ou trois espions nécessitent respectivement 3, 6 ou 9 participants. Les espions ne se connaissent pas.
+- Six catégories officielles, sous-catégories activables individuellement, trois difficultés. Chaque participant déclare ses univers connus : le serveur croise ces connaissances avec les règles du salon. Aucune case de connaissances = aucune restriction individuelle. Le compteur indique le nombre de mots compatibles et inédits, y compris pendant la préparation des réglages.
+- Les règles choisies sont visibles de tous avant le lancement. Une modification remet les statuts prêts à zéro.
+- Révélation : 15 s ; discussion : durée choisie ; vote : 45 s ; tentative de l’espion identifié : 30 s. Les échéances et transitions sont imposées par le serveur. L’hôte peut avancer la révélation et la discussion.
+- Un vote définitif par joueur actif et par bulletin, y compris pour soi-même. Égalité : second tour entre ex æquo ; seconde égalité ou aucun suffrage : victoire des espions. Accuser un innocent donne aussi la victoire aux espions. Les choix restent cachés en mode anonyme et sont affichés pendant le scrutin en mode public.
+- Un espion identifié peut deviner le mot une seule fois. Casse, accents et ponctuation sont ignorés ; les variantes explicites sont acceptées, pas les sous-chaînes. Une mauvaise réponse élimine cet espion ; s’il en reste d’autres, un nouveau vote commence.
+- Option « passage de mot » : une fois par manche, uniquement pendant la révélation et par l’hôte. Le mot change, **les rôles restent identiques**. Le mot écarté est consommé par l’anti-répétition.
+- Aucun mot ni variante déjà tiré ne revient avant épuisement du vivier compatible. À épuisement, le serveur bloque le démarrage et l’interface propose de réinitialiser l’historique des mots ou d’élargir les filtres. Aucun recyclage automatique.
+- Le chat est du texte brut : 300 caractères, 3 messages/5 s, HTML et contrôles invalides rejetés. Il ferme pendant révélation, vote et tentative. Vocal : lien d’invitation Discord facultatif, sans WebRTC.
 
-La session invitée contient un jeton aléatoire de 256 bits ; le serveur n’en conserve que le SHA-256. Actualiser restaure l’identité, le rôle, le vote et le score. Le jeton reste dans le stockage local du navigateur : ne pas le partager. Une seule connexion active par identité.
+**Scores :** innocent gagnant +100 ; espion survivant après l’échec des votes +200 ; espion qui devine +150. Dans ce dernier cas, seul l’espion ayant deviné gagne des points. Un espion éliminé ne reçoit pas de points de survie. L’équipe gagnante est néanmoins comptée comme victorieuse pour ses deux espions dans les statistiques. Aucun bonus de participation.
 
-L’hôte est transféré immédiatement au premier joueur connecté disponible. Un joueur déconnecté conserve son vote et sa place pendant **60 s**. La minuterie de vote de 45 s continue de courir pendant cette fenêtre : elle n’est pas prolongée par une déconnexion. Une tentative d’espion arrivée à échéance est une mauvaise réponse. Après 60 s, le joueur est retiré ; les votes déjà reçus restent enregistrés. Une manche avec moins de 3 participants restants s’arrête en faveur des espions ; c’est une règle de forfait de cette implémentation. Les joueurs partis n’ont pas la possibilité de rejoindre sous une nouvelle identité en cours de manche. L’expulsion est réservée à l’hôte, dans le lobby.
+### Spectateurs et reconnexion
+
+Cocher « Rejoindre comme spectateur » permet d’entrer pendant une manche. Participants et spectateurs sont séparés dans l’interface. Un spectateur ne reçoit aucun rôle ni mot secret, ne vote pas et ne peut pas écrire pendant une manche. Il peut réserver une place pour la prochaine manche, sous réserve des douze places, ou devenir participant immédiatement au lobby. Les résultats terminés sont publics pour les spectateurs ordinaires.
+
+L’identité invitée utilise un jeton de 256 bits, stocké localement dans le navigateur et haché côté serveur. Actualiser restaure identité, rôle, score et vote. Une déconnexion conserve la place et les votes pendant 60 s ; la minuterie de la manche continue. Après ce délai, le joueur est retiré. Moins de trois participants restants met fin à la manche en faveur des espions : règle de forfait héritée de la V1. L’hôte passe immédiatement à un joueur connecté disponible.
+
+### Séries, tournois et presets
+
+Choisir « manches libres », une série de 2 à 10 manches ou un tournoi de 5 à 10 manches. Le classement cumule les points ; le podium final et l’historique indiquent les gagnants, rôles et gains. Les joueurs partis restent au classement de la série. À égalité : score, victoires puis pseudo.
+
+Les règles sont fixes après la première manche d’une série ; les connaissances d’un joueur sont fixes après sa première participation. L’hôte revient au lobby entre les manches ; les participants se redéclarent prêts. Après la dernière, un nouveau démarrage exige une remise à zéro explicite. « Relancer une série » remet scores, progression et historique du salon à zéro sans effacer les résultats du compte. Les identifiants des manches restent uniques et croissants.
+
+L’hôte peut sauvegarder ses réglages dans un preset personnel, l’appliquer dans un autre salon et le supprimer. Les packs du preset doivent encore exister et être accessibles à son propriétaire ; ils sont attachés avant application. Sans PostgreSQL, presets et packs sont disponibles jusqu’au redémarrage du serveur, avec une identité de bibliothèque invitée distincte de la session de salon.
+
+## Packs privés et communautaires
+
+Ouvrir **Bibliothèque** dans l’en-tête :
+
+1. Créer un pack, définir son nom et sa description, puis ajouter les mots, catégories, sous-catégories, difficultés et variantes.
+2. Prévisualiser ou importer/exporter en JSON. L’import charge l’éditeur ; il ne publie rien automatiquement. Le serveur valide également chaque sauvegarde.
+3. Enregistrer le pack privé puis, dans les règles du salon, l’attacher depuis la bibliothèque. L’attachement sélectionne le pack et ses catégories ; on peut ensuite le décocher ou exclure la banque officielle. Les copies déjà attachées sont figées par révision.
+4. Pour une publication communautaire, choisir « Proposer à la communauté ». Le pack reste en attente, absent du catalogue commun, jusqu’à décision d’un modérateur.
+
+Format JSON version 1, maximum 1000 mots et 500 Ko par requête :
+
+```json
+{
+  "version": 1,
+  "name": "Astronomie",
+  "description": "Les astres familiers",
+  "words": [
+    {
+      "label": "Soleil",
+      "category": "Astronomie",
+      "subcategory": "Étoiles",
+      "difficulty": "easy",
+      "variants": ["Sun"]
+    }
+  ]
+}
+```
+
+Les difficultés sont `easy`, `medium`, `hard`. Champs inconnus, HTML, mots vides, doublons et variantes ambiguës sont refusés. Jusqu’à 50 éléments de bibliothèque par propriétaire, dix packs attachés par salon. Les catégories personnalisées ne modifient pas les catégories officielles.
+
+### Modération
+
+Activer PostgreSQL et définir `ADMIN_EMAILS` dans `.env`, avec les adresses des comptes de modération séparées par des virgules. Redémarrer le serveur, puis se connecter avec un de ces comptes. La bibliothèque affiche la file de modération avec le contenu à relire, puis les actions Valider/Refuser. Une adresse envoyée par le client ne confère aucun droit.
+
+La décision porte sur la révision affichée : une édition intervenue entre relecture et validation fait échouer l’approbation. Une modification d’un pack public le retire du catalogue et le remet en attente. Les propriétaires peuvent supprimer leurs packs ; les copies déjà attachées aux salons ne sont pas remplacées silencieusement. Aucun pack public proposé n’est automatiquement validé en mode invité sans base.
+
+## Mode streamer / OBS
+
+L’hôte règle le délai (0–120 s, 15 s par défaut) et la confidentialité, enregistre, puis copie un nouveau lien OBS. Ajouter ce lien comme source navigateur dans OBS ou l’ouvrir dans un navigateur.
+
+- Vue minimale : minuterie synchronisée, manche, joueurs, scores et nombre de votes reçus ; pas de chat, carte personnelle ni commandes de jeu.
+- Connexion en lecture seule avec un jeton de 256 bits distinct d’une session de joueur. Un nouveau lien révoque le précédent. Le jeton est placé dans le fragment `#overlay=…`, qui n’est pas envoyé au serveur lors de la navigation HTTP.
+- Résultats et gains restent côté serveur jusqu’à l’échéance du délai, même si l’hôte revient au lobby. Les mots/rôles ne sont jamais affichés pendant une manche active.
+- Confidentialité activée par défaut : le code, le mot et les rôles restent masqués, y compris après le délai. Si elle est désactivée, le code est visible et le mot/les rôles peuvent apparaître aux résultats après le délai. Les noms de joueurs et leurs scores restent visibles.
+- Pour prendre une place dans une partie, utiliser l’entrée spectateur normale : le lien OBS ne permet pas de participer.
+
+## Comptes et confidentialité
+
+Comptes facultatifs : Argon2id, cookies HttpOnly/SameSite=Strict (Secure en production), déconnexion et suppression. L’espace compte montre les points, victoires, rôles et résultats des 100 dernières manches conservées. L’association du compte au joueur a lieu en créant/rejoignant le salon, sans rattachement rétroactif d’une ancienne session invitée.
+
+Résultats et scores sont persistés dans une transaction et une seule fois par manche/joueur. Les erreurs de sauvegarde sont journalisées et retentées tant que le salon conserve le résultat courant. Les secrets sont calculés côté serveur, les cartes envoyées seulement à leur propriétaire ; l’état public contient des champs explicitement autorisés.
+
+Messages : 100 derniers en mémoire, aucun archivage. Salons inactifs : une heure. Sessions de compte : sept jours. Résultats PostgreSQL : 30 jours, purge horaire. Bibliothèque invitée : cookie de 30 jours ; éléments supprimés après 30 jours sans modification. Bibliothèque de compte : jusqu’à suppression de l’élément ou du compte. La suppression du compte retire son e-mail, mot de passe, sessions et bibliothèque ; les résultats pseudonymisés expirent selon la conservation normale.
 
 ## Vérifier
 
 ```sh
 pnpm typecheck
 pnpm lint
+pnpm format:check
 pnpm test
 pnpm build
 ```
 
-Tests unitaires : contraintes de joueurs, autorisations, confidentialité des cartes et de l’état public, minuteurs, double espion, égalités, votes uniques, scores idempotents, reconnexion, transfert d’hôte, nettoyage, validation du chat et cohérence de la banque de mots.
-
-Tests d’intégration **sur de vraies connexions Socket.IO** : parcours à 3, 6 et 12 clients, création/rejoindre/chat/vote/résultats/revanche, restauration de session, usurpation refusée, spam et démarrages simultanés. Ce ne sont pas des tests de navigateur.
-
-Test PostgreSQL (base de test uniquement ; les comptes de test ont un e-mail UUID et sont nettoyés) :
+Avec une base de test initialisée par les migrations :
 
 ```sh
 TEST_DATABASE_URL=postgresql://spyfall:spyfall_local@localhost:5432/spyfall pnpm test
 ```
 
-Il vérifie inscription, Argon2id, cookies, connexion, association du compte au salon, sauvegarde des résultats et suppression du compte. Il est ignoré sans cette variable. La CI prépare PostgreSQL et exécute l’ensemble.
+Sans cette variable, les deux tests PostgreSQL sont ignorés. Ils créent des comptes avec adresses UUID et nettoient leurs données. Le reste vérifie le moteur et de vraies connexions Socket.IO à 3/6/12 clients, le parcours V1, les filtres, variantes, passages, votes, spectateurs, tournois, presets, packs, autorisations, modération des révisions et délai OBS. La CI prépare PostgreSQL avec les migrations et exécute les contrôles.
 
-### Recette manuelle dans les navigateurs
+### Recette manuelle avant ouverture publique
 
-- Trois profils distincts : créer/rejoindre le même salon, prêts, démarrage et cartes ; vérifier que deux innocents partagent un mot et que l’espion n’a que la catégorie.
-- Recharger pendant la discussion et pendant le vote : identité/rôle inchangés et vote non répétable.
-- Chat instantané, HTML refusé, quatrième message en moins de 5 s refusé ; chat indisponible pendant vote/dernière chance.
-- Provoquer une égalité, une dernière chance et une victoire des innocents ; vérifier le tableau de scores puis rejouer.
-- À six profils, tester les deux espions successivement. Fermer le profil hôte : transfert immédiat ; revenir avant/après 60 s.
-- Vérifier au clavier et à **360 px** : formulaires, paramètres, carte, vote et chat. Tester le lien Discord sur une vraie invitation.
+Utiliser trois profils distincts : créer/rejoindre, préparer les filtres, vérifier les compteurs et les cartes, discuter, voter, tenter une variante, consulter les résultats et rejouer. Tester aussi un spectateur, sa réservation et sa reconnexion, le mode trois espions à neuf participants, un tournoi complet puis son reset. Importer un pack privé, l’utiliser dans un salon, le soumettre, le modérer avec un autre compte, puis modifier sa révision et vérifier le retrait du catalogue. Ouvrir le lien OBS dans une quatrième fenêtre et vérifier délai, confidentialité et révocation.
 
-La compilation et les tests réseau ne remplacent pas cette recette visuelle multi-navigateurs. Aucune validation visuelle automatisée n’est revendiquée dans cette livraison.
+Vérifier au clavier et à **360 px**, ainsi que dans une vraie source navigateur OBS. Les tests réseau et le build ne constituent pas des tests visuels de navigateur : cette recette reste à effectuer dans l’environnement cible.
 
-## Exécuter le build
+## Exécuter le build et configurer l’hébergement
 
 ```sh
 pnpm build
 CLIENT_ORIGIN=http://localhost:3001 pnpm start
 ```
 
-Le serveur sert le build React depuis `apps/web/dist` sur <http://localhost:3001>. Installer aussi les dépendances de développement sur le serveur : le processus Node utilise `tsx` pour exécuter TypeScript. Pour une installation neuve : `pnpm install --frozen-lockfile`, `pnpm db:generate`, puis les commandes ci-dessus.
+Le serveur sert le build React depuis `apps/web/dist` sur <http://localhost:3001>. Installer également les dépendances de développement sur l’hôte : le serveur utilise `tsx`. Une instance publique nécessite un reverse proxy HTTPS/WSS relayant `/socket.io`, une origine autorisée exacte et des cookies Secure. Aucun hébergement n’est configuré automatiquement.
 
-Pour une instance publique : définir `NODE_ENV=production`, `CLIENT_ORIGIN=https://votre-domaine.example`, `PORT`, et éventuellement `DATABASE_URL`. Placer Node derrière un reverse proxy HTTPS qui relaie les WebSockets (`/socket.io`). N’activer `TRUST_PROXY=true` que si le réseau empêche un accès direct au serveur et que le proxy est maîtrisé. L’origine est restreinte à une valeur ; aucun CORS `*`.
+| Variable            | Défaut                  | Rôle                                                                  |
+| ------------------- | ----------------------- | --------------------------------------------------------------------- |
+| `PORT`              | `3001`                  | Port HTTP et Socket.IO                                                |
+| `CLIENT_ORIGIN`     | `http://localhost:5173` | Origine autorisée avec protocole/port                                 |
+| `DATABASE_URL`      | absente                 | Comptes, résultats, bibliothèque PostgreSQL                           |
+| `ADMIN_EMAILS`      | vide                    | Comptes autorisés à modérer les packs                                 |
+| `NODE_ENV`          | développement           | `production` active les cookies Secure                                |
+| `TRUST_PROXY`       | `false`                 | Seulement derrière un proxy de confiance sans accès direct au serveur |
+| `TEST_DATABASE_URL` | absente                 | Active les tests PostgreSQL                                           |
 
-| Variable            | Défaut                  | Rôle                                                |
-| ------------------- | ----------------------- | --------------------------------------------------- |
-| `PORT`              | `3001`                  | Port HTTP/Socket.IO                                 |
-| `CLIENT_ORIGIN`     | `http://localhost:5173` | Origine autorisée, avec protocole et port           |
-| `DATABASE_URL`      | absente                 | Comptes et résultats PostgreSQL, facultatifs        |
-| `NODE_ENV`          | développement           | Cookies Secure si `production`                      |
-| `TRUST_PROXY`       | `false`                 | À activer uniquement derrière un proxy de confiance |
-| `TEST_DATABASE_URL` | absente                 | Active le test d’intégration PostgreSQL             |
+## Structure et limites
 
-## Architecture et confidentialité
+- `apps/server/src/engine.ts` : moteur, phases, secrets, tirage, filtres, scores, spectateurs, séries et projection OBS.
+- `apps/server/src/server.ts` : Fastify, Socket.IO, comptes et sauvegarde des résultats.
+- `apps/server/src/library.ts` : bibliothèque, presets, contrôle de propriété et modération par révision.
+- `apps/web/src/main.tsx` : parcours de jeu ; `v2.tsx` : réglages, bibliothèque, connaissances, classements et overlay.
+- `packages/shared` : types publics et schémas Zod ; `data` : banque de mots ; `prisma` : schéma, migrations et seed.
 
-- `apps/web` : React, Vite, Tailwind CSS, interface française responsive. Aucun mot de la banque n’est embarqué dans le bundle.
-- `apps/server/src/engine.ts` : moteur testable, phases, rôles, votes, minuterie et scores.
-- `apps/server/src/server.ts` : Fastify, Socket.IO, validation, autorisations, comptes et sauvegarde transactionnelle.
-- `packages/shared` : types publics, événements et schémas Zod. Toutes les commandes reçoivent un accusé explicite.
-- `data/words.fr.json` : 300 entrées éditoriales, 50 par catégorie, sans doublons normalisés, trois difficultés. Les mots sont tirés côté serveur avec un générateur cryptographique ; pas de répétition dans le salon tant que la sélection n’est pas épuisée.
-- `prisma` : schéma PostgreSQL et seed idempotent ; `infra` : Docker Compose local.
+Les salons actifs et les liens OBS restent **en mémoire, sur une seule instance** : un redémarrage les perd. PostgreSQL conserve comptes, bibliothèque et résultats terminés, sans restaurer une manche active. Prévoir Redis, reprise, sauvegardes et monitoring avant montée en charge. Sans base, la bibliothèque disparaît aussi au redémarrage.
 
-L’état public est construit avec une liste de champs autorisés. Il ne contient jamais la banque, le mot ni les rôles de tous les joueurs avant les résultats. Les cartes privées vont uniquement à la socket de leur propriétaire. Le serveur utilise des échéances absolues ; le client corrige son horloge à partir de l’heure serveur.
-
-Chat : texte brut rendu par React, 300 caractères, HTML et contrôles invalides rejetés, 3 messages/5 s ; plafond général de 40 commandes/socket/10 s. Les requêtes HTTP et les tentatives d’authentification sont aussi limitées. Payloads de 16 Ko maximum.
-
-Données : messages limités aux 100 derniers en mémoire, non archivés. Salons inactifs purgés après une heure, identités invitées supprimées avec le salon. Sessions de compte : 7 jours. Résultats PostgreSQL : 30 jours, purge horaire. La suppression de compte retire l’e-mail, le mot de passe et les sessions ; les résultats pseudonymisés restent jusqu’à leur expiration. Les statistiques couvrent les 100 dernières manches conservées.
-
-## Limites avant ouverture publique
-
-- **Serveur unique, salons en mémoire.** Un redémarrage perd les salons actifs, les sessions invitées et leurs scores de salon. PostgreSQL conserve les comptes et les résultats terminés, pas la restauration d’une manche active. Redis et une stratégie de reprise sont nécessaires avant plusieurs instances.
-- La banque contient 300 propositions structurées et contrôlées automatiquement pour les doublons ; elle exige encore une **relecture humaine** des libellés, difficultés et ambiguïtés avant lancement public.
-- Recette visuelle et tests E2E dans des navigateurs réels à effectuer ; les tests fournis couvrent le moteur, HTTP, PostgreSQL et les sockets.
-- Pas de signalement/modération des messages ni d’administration, de récupération de mot de passe, de vérification d’e-mail ou d’export des données. Prévoir ces outils et les mentions RGPD adaptées à l’exploitant avant ouverture publique.
-- Pas de Redis, monitoring de production, sauvegardes PostgreSQL automatisées ou déploiement public configuré. Les identifiants Docker sont exclusivement locaux.
-- Les modes infiltré/chaos/tournoi, succès, catégories communautaires et filtres personnels restent hors V1. Aucun vocal hébergé : Discord externe uniquement.
+La banque de 300 mots, ses sous-catégories et ses variantes demandent une relecture éditoriale humaine avant ouverture publique. La recette visuelle multi-navigateurs et OBS n’est pas automatisée dans cette livraison. Le signalement/modération du chat, récupération de mot de passe, vérification d’e-mail, export RGPD de compte, modes infiltré/chaos et création de succès restent hors des fonctionnalités livrées. Adapter les mentions légales à l’exploitant ; les identifiants Docker sont uniquement locaux.

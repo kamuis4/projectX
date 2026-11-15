@@ -37,6 +37,7 @@ import {
 } from "lucide-react";
 import {
   categories,
+  spiesFor,
   type RoomView,
   type Session,
   type Card,
@@ -45,6 +46,14 @@ import {
   type Command,
 } from "@spyfall/shared";
 import "./styles.css";
+import {
+  AdvancedSettings,
+  Preferences,
+  SpectatorControls,
+  SeriesPanel,
+  LibraryPanel,
+  StreamOverlay,
+} from "./v2";
 const socket = io({ autoConnect: false, withCredentials: true });
 const icons = [Sparkles, Play, Target, Radio, Volume2, BookOpen];
 function read<T>(key: string): T | null {
@@ -109,7 +118,9 @@ function App() {
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [pending, setPending] = useState(false);
-  const [modal, setModal] = useState<"rules" | "account" | null>(null);
+  const [modal, setModal] = useState<"rules" | "account" | "library" | null>(
+    null,
+  );
   const [account, setAccount] = useState<{
     username: string;
     email: string;
@@ -118,9 +129,21 @@ function App() {
   const [accountMode, setAccountMode] = useState<"login" | "register">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [stats, setStats] = useState<{ rounds: number; points: number } | null>(
-    null,
-  );
+  const [stats, setStats] = useState<{
+    rounds: number;
+    points: number;
+    wins?: number;
+    spyRounds?: number;
+    history?: {
+      points: number;
+      role: string;
+      winner: string;
+      reason: string;
+      finishedAt: string;
+    }[];
+  } | null>(null);
+  const [spectator, setSpectator] = useState(false);
+  const shownRevision = useRef("");
   const [chat, setChat] = useState("");
   const [guess, setGuess] = useState("");
   const [clock, setClock] = useState(Date.now());
@@ -169,11 +192,12 @@ function App() {
       setRoom(value);
       setRestoring(false);
     };
-    const privateCard = (value: Card) =>
-      setCard((previous) => {
-        if (previous?.roundIndex !== value.roundIndex) setShown(false);
-        return value;
-      });
+    const privateCard = (value: Card) => {
+      const revision = `${value.roundIndex}:${value.revision}`;
+      if (shownRevision.current !== revision) setShown(false);
+      shownRevision.current = revision;
+      setCard(value);
+    };
     const kicked = () => {
       clear();
       setError("L’hôte vous a retiré du salon.");
@@ -192,7 +216,9 @@ function App() {
     socket.on("game:private-card", privateCard);
     socket.on("room:kicked", kicked);
     socket.on("session:replaced", replaced);
-    socket.connect();
+    void fetch("/api/library")
+      .catch(() => {})
+      .finally(() => socket.connect());
     void fetch("/api/auth/me")
       .then((r) => r.json())
       .then((data) => {
@@ -207,13 +233,14 @@ function App() {
       socket.disconnect();
     };
   }, []);
+  const settingsKey = JSON.stringify(room?.settings);
   useEffect(() => {
     if (room?.phase === "lobby") {
       setCard(null);
       setShown(false);
     }
     setSettings(room?.settings ?? null);
-  }, [room?.settings, room?.phase]);
+  }, [settingsKey, room?.phase]);
   useEffect(() => {
     setVoteTarget("");
     setVoted(
@@ -287,6 +314,20 @@ function App() {
             resolve(false);
             return;
           }
+          if (ack.streamToken) {
+            void navigator.clipboard
+              .writeText(`${location.origin}/#overlay=${ack.streamToken}`)
+              .then(() =>
+                setNotice(
+                  "Lien OBS copié. Il permet uniquement une vue en lecture.",
+                ),
+              )
+              .catch(() =>
+                setNotice(
+                  `Lien OBS : ${location.origin}/#overlay=${ack.streamToken}`,
+                ),
+              );
+          }
           if (ack.session) {
             write("spyfall-session", ack.session);
             setSession(ack.session);
@@ -302,10 +343,16 @@ function App() {
     void send("room:join", {
       nickname: nickname.trim(),
       code: code.trim().toUpperCase(),
+      spectator,
     });
   };
   const me = room?.players.find((p) => p.id === session?.playerId);
-  const host = room?.hostPlayerId === me?.id;
+  const host = !!me && room?.hostPlayerId === me.id;
+  const activePlayers = room?.players.filter((p) => !p.spectator) ?? [];
+  const chatAllowed =
+    !!room &&
+    ["lobby", "discussion", "results"].includes(room.phase) &&
+    !(me?.spectator && room.phase === "discussion");
   const seconds = room?.deadlineAt
     ? Math.max(0, Math.ceil((room.deadlineAt - clock - offset.current) / 1000))
     : 0;
@@ -336,6 +383,7 @@ function App() {
       setPassword("");
       setModal(null);
       setNotice("Vous êtes connecté.");
+      socket.disconnect().connect();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Connexion impossible.");
     } finally {
@@ -345,6 +393,7 @@ function App() {
   const logout = async () => {
     await fetch("/api/auth/logout", { method: "POST" });
     setAccount(null);
+    socket.disconnect().connect();
     setStats(null);
     setModal(null);
   };
@@ -375,7 +424,16 @@ function App() {
           </span>
         </a>
         <nav>
-          <button className="nav-link" onClick={() => setModal("rules")}>
+          <button
+            className="nav-link library-link"
+            onClick={() => setModal("library")}
+          >
+            Bibliothèque
+          </button>
+          <button
+            className="nav-link rule-link"
+            onClick={() => setModal("rules")}
+          >
             Comment jouer <ArrowUpRight size={14} />
           </button>
           <span className={`connection ${online ? "connected" : ""}`}>
@@ -505,6 +563,14 @@ function App() {
                 <span>ou rejoindre vos amis</span>
               </div>
               <form onSubmit={join}>
+                <label className="checkbox-row">
+                  <input
+                    type="checkbox"
+                    checked={spectator}
+                    onChange={(e) => setSpectator(e.target.checked)}
+                  />
+                  Rejoindre comme spectateur
+                </label>
                 <label className="field-label" htmlFor="code">
                   Code du salon
                 </label>
@@ -651,16 +717,17 @@ function App() {
               secondes.
             </div>
           )}
+          <SeriesPanel room={room} host={host} send={send} pending={pending} />
           <div className="room-layout">
             <aside className="players-panel panel">
               <div className="panel-title">
                 <h2>
                   <Users size={17} /> Les joueurs
                 </h2>
-                <span>{room.players.length}/12</span>
+                <span>{activePlayers.length}/12</span>
               </div>
               <div className="player-list">
-                {room.players.map((player, i) => (
+                {activePlayers.map((player, i) => (
                   <div
                     className={`player ${player.eliminated ? "eliminated" : ""}`}
                     key={player.id}
@@ -705,6 +772,47 @@ function App() {
                   </div>
                 ))}
               </div>
+              <div className="spectator-list">
+                <h3>
+                  Spectateurs ({room.players.filter((p) => p.spectator).length}
+                  /50)
+                </h3>
+                {room.players
+                  .filter((p) => p.spectator)
+                  .map((p) => (
+                    <div key={p.id}>
+                      <span>
+                        {p.nickname}
+                        {p.id === me?.id ? " (vous)" : ""}
+                      </span>
+                      <small>
+                        {p.queued
+                          ? "Place réservée"
+                          : p.connected
+                            ? "En ligne"
+                            : "Absent"}
+                      </small>
+                      {host && room.phase === "lobby" && p.id !== me?.id && (
+                        <button
+                          className="kick"
+                          aria-label={`Expulser ${p.nickname}`}
+                          onClick={() =>
+                            void send("room:kick", { playerId: p.id })
+                          }
+                        >
+                          ×
+                        </button>
+                      )}
+                    </div>
+                  ))}
+              </div>
+              <SpectatorControls
+                room={room}
+                me={me}
+                send={send}
+                pending={pending}
+              />
+              <Preferences room={room} me={me} send={send} pending={pending} />
               <div className="players-footer">
                 {room.phase === "lobby" ? (
                   <>
@@ -742,182 +850,52 @@ function App() {
                       {host ? "VOUS ÊTES L’HÔTE" : "CHOISIS PAR L’HÔTE"}
                     </span>
                   </div>
-                  <div className="settings-body">
-                    {settings && (
-                      <>
-                        <fieldset disabled={!host || pending}>
-                          <legend>Mode de jeu</legend>
-                          <div className="mode-options">
-                            {(["classic", "double"] as const).map((mode) => (
-                              <button
-                                key={mode}
-                                onClick={() =>
-                                  setSettings({ ...settings, mode })
-                                }
-                                className={`mode-option ${settings.mode === mode ? "selected" : ""}`}
-                              >
-                                <Shield size={21} />
-                                <strong>
-                                  {mode === "classic"
-                                    ? "Classique"
-                                    : "Double espion"}
-                                </strong>
-                                <span>
-                                  {mode === "classic"
-                                    ? "1 espion · 3–12 joueurs"
-                                    : "2 espions · 6–12 joueurs"}
-                                </span>
-                                {settings.mode === mode && (
-                                  <CheckCircle2 size={15} />
-                                )}
-                              </button>
-                            ))}
-                          </div>
-                        </fieldset>
-                        <fieldset disabled={!host || pending}>
-                          <legend>Durée de discussion</legend>
-                          <div className="duration-options">
-                            {([3, 5, 7, 10] as const).map((duration) => (
-                              <button
-                                className={
-                                  settings.duration === duration
-                                    ? "selected"
-                                    : ""
-                                }
-                                key={duration}
-                                onClick={() =>
-                                  setSettings({ ...settings, duration })
-                                }
-                              >
-                                {duration} min
-                              </button>
-                            ))}
-                          </div>
-                        </fieldset>
-                        <fieldset disabled={!host || pending}>
-                          <legend>
-                            Catégories <small>Au moins une</small>
-                          </legend>
-                          <div className="category-options">
-                            {categories.map((category) => (
-                              <button
-                                key={category}
-                                className={
-                                  settings.categories.includes(category)
-                                    ? "selected"
-                                    : ""
-                                }
-                                onClick={() =>
-                                  setSettings({
-                                    ...settings,
-                                    categories: settings.categories.includes(
-                                      category,
-                                    )
-                                      ? settings.categories.filter(
-                                          (c) => c !== category,
-                                        )
-                                      : [...settings.categories, category],
-                                  })
-                                }
-                              >
-                                {settings.categories.includes(category) ? (
-                                  <Check size={13} />
-                                ) : (
-                                  <span className="empty-check" />
-                                )}
-                                {category}
-                              </button>
-                            ))}
-                          </div>
-                        </fieldset>
-                        <label className="field-label" htmlFor="difficulty">
-                          Difficulté
-                        </label>
-                        <select
-                          id="difficulty"
-                          disabled={!host || pending}
-                          value={settings.difficulty}
-                          onChange={(e) =>
-                            setSettings({
-                              ...settings,
-                              difficulty: e.target
-                                .value as Settings["difficulty"],
-                            })
-                          }
-                        >
-                          <option value="all">Toutes les difficultés</option>
-                          <option value="easy">Facile</option>
-                          <option value="medium">Intermédiaire</option>
-                          <option value="hard">Difficile</option>
-                        </select>
-                        <label className="field-label" htmlFor="discord">
-                          Invitation Discord{" "}
-                          <span className="subtle">· facultatif</span>
-                        </label>
-                        <input
-                          id="discord"
-                          type="url"
-                          disabled={!host || pending}
-                          placeholder="https://discord.gg/…"
-                          value={settings.discordUrl}
-                          onChange={(e) =>
-                            setSettings({
-                              ...settings,
-                              discordUrl: e.target.value,
-                            })
-                          }
-                        />
-                        {host &&
-                          JSON.stringify(settings) !==
-                            JSON.stringify(room.settings) && (
-                            <Button
-                              kind="secondary"
-                              disabled={
-                                pending || settings.categories.length === 0
-                              }
-                              onClick={() =>
-                                void send("room:settings:update", settings)
-                              }
-                            >
-                              Enregistrer les paramètres
-                            </Button>
-                          )}
-                      </>
-                    )}
-                  </div>
+                  {settings && (
+                    <AdvancedSettings
+                      room={room}
+                      value={settings}
+                      onChange={setSettings}
+                      host={host}
+                      pending={pending}
+                      send={send}
+                      socket={socket}
+                    />
+                  )}
                   <div className="launch">
                     <p>
-                      {room.players.filter((p) => p.ready).length}/
-                      {room.players.length} joueurs prêts{" "}
-                      <span>
-                        · minimum {room.settings.mode === "double" ? 6 : 3}
-                      </span>
+                      {activePlayers.filter((p) => p.ready).length}/
+                      {activePlayers.length} joueurs prêts{" "}
+                      <span>· minimum {spiesFor(room.settings) * 3}</span>
                     </p>
                     <div>
-                      <Button
-                        kind={me?.ready ? "secondary" : "primary"}
-                        disabled={pending}
-                        onClick={() =>
-                          void send("room:ready", { ready: !me?.ready })
-                        }
-                      >
-                        {me?.ready ? (
-                          <>
-                            <Check size={16} /> Je suis prêt
-                          </>
-                        ) : (
-                          <>
-                            Je suis prêt <Check size={16} />
-                          </>
-                        )}
-                      </Button>
+                      {!me?.spectator && (
+                        <Button
+                          kind={me?.ready ? "secondary" : "primary"}
+                          disabled={pending}
+                          onClick={() =>
+                            void send("room:ready", { ready: !me?.ready })
+                          }
+                        >
+                          {me?.ready ? (
+                            <>
+                              <Check size={16} /> Je suis prêt
+                            </>
+                          ) : (
+                            <>
+                              Je suis prêt <Check size={16} />
+                            </>
+                          )}
+                        </Button>
+                      )}
                       {host && (
                         <Button
                           disabled={
                             pending ||
-                            room.players.length <
-                              (room.settings.mode === "double" ? 6 : 3) ||
-                            !room.players.every(
+                            room.tournamentFinished ||
+                            room.remainingWords === 0 ||
+                            activePlayers.length <
+                              spiesFor(room.settings) * 3 ||
+                            !activePlayers.every(
                               (p) => p.ready && p.connected,
                             ) ||
                             JSON.stringify(settings) !==
@@ -989,6 +967,21 @@ function App() {
                     )}
                   </div>
                 </>
+              ) : me?.spectator ? (
+                <div className="active-game">
+                  <Eye size={38} />
+                  <h2>Vue spectateur</h2>
+                  <p className="phase-help">
+                    {phaseLabel[room.phase]} · {seconds} s<br />
+                    Observez la partie sans carte ni vote.
+                  </p>
+                  <SpectatorControls
+                    room={room}
+                    me={me}
+                    send={send}
+                    pending={pending}
+                  />
+                </div>
               ) : (
                 <>
                   <div className="panel-title">
@@ -1058,6 +1051,22 @@ function App() {
                             ? "Mémorisez votre carte. La discussion commencera automatiquement."
                             : "Posez une question à un autre joueur. Restez subtil : l’espion vous écoute."}
                         </p>
+                        {host &&
+                          room.phase === "reveal" &&
+                          room.settings.allowPass &&
+                          !room.passed && (
+                            <Button
+                              kind="secondary"
+                              disabled={pending}
+                              onClick={() =>
+                                void send("game:pass", {
+                                  roundIndex: room.roundIndex,
+                                })
+                              }
+                            >
+                              Passer ce mot · même distribution des rôles
+                            </Button>
+                          )}
                         {host && (
                           <Button
                             kind="secondary"
@@ -1139,6 +1148,28 @@ function App() {
                           </Button>
                         ) : (
                           <p>Vous assistez à ce vote en tant que spectateur.</p>
+                        )}
+                        {room.publicVotes.length > 0 && (
+                          <div
+                            className="public-votes"
+                            aria-label="Votes publics"
+                          >
+                            {room.publicVotes.map((v) => (
+                              <p key={v.voterPlayerId}>
+                                {
+                                  room.players.find(
+                                    (p) => p.id === v.voterPlayerId,
+                                  )?.nickname
+                                }{" "}
+                                →{" "}
+                                {
+                                  room.players.find(
+                                    (p) => p.id === v.targetPlayerId,
+                                  )?.nickname
+                                }
+                              </p>
+                            ))}
+                          </div>
                         )}
                         <span className="vote-progress">
                           {room.voteCount} / {room.eligibleVoters.length} votes
@@ -1265,13 +1296,9 @@ function App() {
                 <input
                   id="chat"
                   maxLength={300}
-                  disabled={
-                    !["lobby", "discussion", "results"].includes(room.phase)
-                  }
+                  disabled={!chatAllowed}
                   placeholder={
-                    ["lobby", "discussion", "results"].includes(room.phase)
-                      ? "Écrivez un message…"
-                      : "Chat en pause…"
+                    chatAllowed ? "Écrivez un message…" : "Chat en pause…"
                   }
                   value={chat}
                   onChange={(e) => setChat(e.target.value)}
@@ -1279,11 +1306,7 @@ function App() {
                 <button
                   type="submit"
                   aria-label="Envoyer le message"
-                  disabled={
-                    pending ||
-                    !chat.trim() ||
-                    !["lobby", "discussion", "results"].includes(room.phase)
-                  }
+                  disabled={pending || !chat.trim() || !chatAllowed}
                 >
                   <Send size={18} />
                 </button>
@@ -1309,7 +1332,7 @@ function App() {
       {modal && (
         <div className="modal-backdrop" onClick={() => setModal(null)}>
           <section
-            className="modal"
+            className={`modal ${modal === "library" ? "library-modal" : ""}`}
             role="dialog"
             aria-modal="true"
             aria-labelledby="modal-title"
@@ -1369,6 +1392,12 @@ function App() {
                   Mission comprise <Check size={16} />
                 </Button>
               </>
+            ) : modal === "library" ? (
+              <>
+                <span className="eyebrow">VOS UNIVERS</span>
+                <h2 id="modal-title">Bibliothèque de packs.</h2>
+                <LibraryPanel />
+              </>
             ) : account ? (
               <>
                 <span className="eyebrow">VOTRE ESPACE</span>
@@ -1382,7 +1411,30 @@ function App() {
                     <span>
                       Points <b>{stats.points ?? 0}</b>
                     </span>
+                    <span>
+                      Victoires{" "}
+                      <b>
+                        {stats.wins ?? 0} / {stats.rounds}
+                      </b>
+                    </span>
+                    <span>
+                      Manches comme espion <b>{stats.spyRounds ?? 0}</b>
+                    </span>
                   </div>
+                )}
+                {stats?.history && (
+                  <details className="account-history">
+                    <summary>Mes dernières manches</summary>
+                    {stats.history.map((entry, i) => (
+                      <p key={i}>
+                        {new Date(entry.finishedAt).toLocaleString("fr-FR")} ·{" "}
+                        {entry.role === "spy" ? "Espion" : "Innocent"} · +
+                        {entry.points} pts
+                        <br />
+                        {entry.reason}
+                      </p>
+                    ))}
+                  </details>
                 )}
                 <p className="subtle">
                   Les résultats de compte sont conservés 30 jours. Les salons
@@ -1510,4 +1562,9 @@ function App() {
     </div>
   );
 }
-createRoot(document.getElementById("root")!).render(<App />);
+const overlayToken =
+  new URLSearchParams(location.hash.slice(1)).get("overlay") ??
+  new URLSearchParams(location.search).get("overlay");
+createRoot(document.getElementById("root")!).render(
+  overlayToken ? <StreamOverlay token={overlayToken} /> : <App />,
+);
