@@ -99,13 +99,15 @@ model Message {
 }
 
 model Word {
-  id         String  @id
-  categoryId String
-  label      String
-  difficulty String
-  locale     String  @default("fr")
-  enabled    Boolean @default(true)
-  rounds     Round[]
+  id          String   @id
+  categoryId  String
+  label       String
+  subcategory String   @default("Général")
+  variants    String[] @default([])
+  difficulty  String
+  locale      String   @default("fr")
+  enabled     Boolean  @default(true)
+  rounds      Round[]
 
   @@unique([label, locale])
 }
@@ -118,4 +120,18 @@ model Score {
   reason   String
 
   @@id([roundId, playerId])
+}
+
+model LibraryItem {
+  id        String   @id
+  ownerKey  String
+  kind      String
+  payload   Json
+  status    String   @default("private")
+  revision  Int      @default(1)
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  @@index([ownerKey, kind])
+  @@index([kind, status])
 }

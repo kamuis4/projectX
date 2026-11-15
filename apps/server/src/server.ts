@@ -16,6 +16,7 @@ import {
   type Command,
   type Ack,
 } from "@spyfall/shared";
+import { registerLibrary } from "./library";
 import { Engine, GameError, hash, type Player, type Room } from "./engine";
 
 export async function createServer(
@@ -24,6 +25,7 @@ export async function createServer(
     databaseUrl?: string;
     origin?: string;
     logger?: boolean;
+    moderators?: string[];
   } = {},
 ) {
   const engine = options.engine ?? new Engine();
@@ -63,6 +65,36 @@ export async function createServer(
     });
     return session && session.expiresAt > new Date() ? session.user : null;
   };
+  const library = registerLibrary(
+    app,
+    db,
+    authUser,
+    options.moderators ??
+      (process.env.ADMIN_EMAILS ?? "")
+        .split(",")
+        .map((v) => v.trim().toLowerCase())
+        .filter(Boolean),
+  );
+  app.setErrorHandler((err, _req, reply) => {
+    if (err instanceof z.ZodError)
+      return reply
+        .code(400)
+        .send({ error: err.issues[0]?.message ?? "Données invalides." });
+    if (err instanceof GameError)
+      return reply.code(400).send({ error: err.message });
+    const statusCode =
+      err instanceof Error &&
+      "statusCode" in err &&
+      typeof err.statusCode === "number"
+        ? err.statusCode
+        : 500;
+    if (statusCode === 429)
+      return reply
+        .code(429)
+        .send({ error: "Trop de requêtes. Patientez une minute." });
+    app.log.error({ err });
+    return reply.code(statusCode).send({ error: "La requête a échoué." });
+  });
   app.addHook("onRequest", async (req, reply) => {
     if (
       req.method !== "GET" &&
@@ -155,6 +187,7 @@ export async function createServer(
     const user = await authUser(req.cookies.account);
     if (!db || !user)
       return reply.code(401).send({ error: "Connexion requise." });
+    await library.store.removeOwner(`user:${user.id}`);
     await db.user.delete({ where: { id: user.id } });
     for (const room of engine.rooms.values())
       for (const p of room.players)
@@ -172,14 +205,32 @@ export async function createServer(
     });
     const scores = await db.score.findMany({
       where: { playerId: { in: players.map((p) => p.id) } },
-      include: { round: { select: { finishedAt: true, winner: true } } },
+      include: {
+        round: { select: { finishedAt: true, winner: true, roles: true } },
+      },
       orderBy: { round: { finishedAt: "desc" } },
       take: 100,
     });
     return {
       rounds: scores.length,
       points: scores.reduce((n, s) => n + s.points, 0),
+      wins: scores.filter(
+        (s) =>
+          (s.round.winner === "spies") ===
+          s.round.roles.some(
+            (r) => r.playerId === s.playerId && r.role === "spy",
+          ),
+      ).length,
+      spyRounds: scores.filter((s) =>
+        s.round.roles.some(
+          (r) => r.playerId === s.playerId && r.role === "spy",
+        ),
+      ).length,
       history: scores.map((s) => ({
+        role:
+          s.round.roles.find((r) => r.playerId === s.playerId)?.role ??
+          "innocent",
+        winner: s.round.winner,
         points: s.points,
         reason: s.reason,
         finishedAt: s.round.finishedAt,
@@ -220,13 +271,15 @@ export async function createServer(
             },
             update: {},
           });
-        await tx.word.upsert({
-          where: { id: r.word.id },
+        const persistedWord = await tx.word.upsert({
+          where: { label_locale: { label: r.word.label, locale: "fr" } },
           create: {
             id: r.word.id,
             label: r.word.label,
             categoryId: r.word.category,
             difficulty: r.word.difficulty,
+            subcategory: r.word.subcategory,
+            variants: r.word.variants,
             locale: "fr",
           },
           update: {},
@@ -237,7 +290,7 @@ export async function createServer(
             id,
             roomId: room.id,
             index: r.index,
-            wordId: r.word.id,
+            wordId: persistedWord.id,
             phase: "results",
             finishedAt: new Date(),
             winner: r.result!.winner,
@@ -268,12 +321,13 @@ export async function createServer(
   const broadcast = (room: Room) => {
     room.updatedAt = Date.now();
     io.to(room.code).emit("room:state", engine.view(room));
+    io.to(`stream:${room.id}`).emit("stream:state", engine.streamView(room));
     io.to(room.code).emit("game:phase", {
       phase: room.phase,
       deadlineAt: engine.view(room).deadlineAt,
     });
     for (const p of room.players) {
-      if (p.socketId && !p.left) {
+      if (p.socketId && !p.left && !p.spectator) {
         const card = engine.card(room, p);
         if (card) io.to(p.socketId).emit("game:private-card", card);
       }
@@ -320,6 +374,22 @@ export async function createServer(
             throw new GameError(
               parsed.error.issues[0]?.message ?? "Commande invalide.",
             );
+          if (name === "stream:watch") {
+            if (socket.data.code || socket.data.streamId)
+              throw new GameError("Utilisez une connexion dédiée à l’overlay.");
+            const token = commands[name].parse(payload).token;
+            const room = engine.streamRoom(token);
+            if (!room)
+              throw new GameError("Lien spectateur invalide ou expiré.");
+            socket.data.streamId = room.id;
+            socket.data.streamTokenHash = hash(token);
+            await socket.join(`stream:${room.id}`);
+            socket.emit("stream:state", engine.streamView(room));
+            ack({ ok: true });
+            return;
+          }
+          if (socket.data.streamId)
+            throw new GameError("Cette connexion est en lecture seule.");
           if (
             name === "room:create" ||
             name === "room:join" ||
@@ -375,6 +445,7 @@ export async function createServer(
                     data.nickname,
                     socket.id,
                     user?.id,
+                    commands["room:join"].parse(payload).spectator,
                   );
             await attach(socket, result.room, result.player);
             ack({ ok: true, session: result.session });
@@ -386,6 +457,74 @@ export async function createServer(
           }
           const { room, player } = identity(socket);
           switch (name) {
+            case "room:preview": {
+              const settings = commands[name].parse(payload);
+              if (!settings.packIds.every((id) => room.packs.has(id)))
+                throw new GameError("Pack non attaché.");
+              const preview = { ...room, settings };
+              const pool = engine.pool(preview);
+              ack({
+                ok: true,
+                counts: {
+                  available: pool.length,
+                  remaining: pool.filter((w) => engine.isUnseen(room, w))
+                    .length,
+                },
+              });
+              return;
+            }
+            case "room:preferences": {
+              const data = commands[name].parse(payload);
+              engine.preferences(
+                room,
+                player,
+                data.categories,
+                data.subcategories,
+              );
+              break;
+            }
+            case "room:participate":
+              engine.participate(
+                room,
+                player,
+                commands[name].parse(payload).queued,
+              );
+              break;
+            case "words:reset":
+              engine.resetWords(room, player);
+              break;
+            case "game:pass":
+              engine.pass(
+                room,
+                player,
+                commands[name].parse(payload).roundIndex,
+              );
+              break;
+            case "tournament:reset":
+              engine.resetTournament(room, player);
+              break;
+            case "pack:attach": {
+              const who = await library.owner({
+                cookies: app.parseCookie(socket.handshake.headers.cookie ?? ""),
+              } as import("fastify").FastifyRequest);
+              const record = await library.store.packFor(
+                commands[name].parse(payload).packId,
+                who.key,
+              );
+              engine.attachPack(room, player, record);
+              break;
+            }
+            case "stream:create": {
+              const token = engine.streamLink(room, player);
+              for (const stream of io.sockets.sockets.values())
+                if (stream.data.streamId === room.id) {
+                  stream.emit("stream:expired");
+                  stream.disconnect(true);
+                }
+              ack({ ok: true, streamToken: token });
+              return;
+            }
+
             case "room:leave":
               engine.leave(room, player);
               await socket.leave(room.code);
@@ -397,6 +536,10 @@ export async function createServer(
             case "room:ready":
               if (room.phase !== "lobby")
                 throw new GameError("La manche a déjà commencé.");
+              if (player.spectator)
+                throw new GameError(
+                  "Un spectateur ne peut pas se déclarer prêt.",
+                );
               player.ready = commands[name].parse(payload).ready;
               break;
             case "room:kick": {
@@ -467,6 +610,10 @@ export async function createServer(
                 room.phase === "discussion"
               )
                 throw new GameError("Vous êtes éliminé.");
+              if (player.spectator && room.phase === "discussion")
+                throw new GameError(
+                  "Le chat des spectateurs est fermé pendant une manche.",
+                );
               chats = chats.filter((t) => now - t < 5000);
               if (chats.length >= 3)
                 throw new GameError(
@@ -519,10 +666,18 @@ export async function createServer(
       );
       if (before !== after) broadcast(room);
       if (room.phase === "results") void persist(room);
+      io.to(`stream:${room.id}`).emit("stream:state", engine.streamView(room));
+      if (!engine.rooms.has(room.code))
+        for (const stream of io.sockets.sockets.values())
+          if (stream.data.streamId === room.id) {
+            stream.emit("stream:expired");
+            stream.disconnect(true);
+          }
     }
   }, 500);
   tick.unref();
   const cleanup = setInterval(() => {
+    void library.store.expireGuests().catch((err) => app.log.error({ err }));
     if (db)
       void db
         .$transaction([

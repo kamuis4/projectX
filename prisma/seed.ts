@@ -10,6 +10,8 @@ try {
       difficulty: word.difficulty,
       locale: word.locale,
       enabled: word.enabled,
+      subcategory: word.subcategory,
+      variants: word.variants,
     };
     await db.word.upsert({
       where: { id: word.id },
