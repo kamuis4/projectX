@@ -1,0 +1,121 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String           @id @default(uuid())
+  username     String
+  email        String           @unique
+  passwordHash String
+  createdAt    DateTime         @default(now())
+  sessions     AccountSession[]
+  players      Player[]
+}
+
+model AccountSession {
+  tokenHash String   @id
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+}
+
+model Room {
+  id           String    @id
+  code         String    @unique
+  hostPlayerId String
+  settings     Json
+  phase        String
+  createdAt    DateTime  @default(now())
+  expiresAt    DateTime
+  players      Player[]
+  rounds       Round[]
+  messages     Message[]
+}
+
+model Player {
+  id               String  @id
+  roomId           String
+  room             Room    @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  userId           String?
+  user             User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+  nickname         String
+  connected        Boolean @default(false)
+  ready            Boolean @default(false)
+  sessionTokenHash String
+
+  @@index([userId])
+}
+
+model Round {
+  id         String      @id
+  roomId     String
+  room       Room        @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  index      Int
+  wordId     String
+  word       Word        @relation(fields: [wordId], references: [id])
+  phase      String
+  startedAt  DateTime    @default(now())
+  deadlineAt DateTime?
+  finishedAt DateTime?
+  winner     String?
+  roles      RoundRole[]
+  votes      Vote[]
+  scores     Score[]
+
+  @@unique([roomId, index])
+}
+
+model RoundRole {
+  roundId  String
+  round    Round  @relation(fields: [roundId], references: [id], onDelete: Cascade)
+  playerId String
+  role     String
+
+  @@id([roundId, playerId])
+}
+
+model Vote {
+  roundId        String
+  round          Round  @relation(fields: [roundId], references: [id], onDelete: Cascade)
+  voterPlayerId  String
+  targetPlayerId String
+  ballotIndex    Int
+
+  @@id([roundId, voterPlayerId, ballotIndex])
+}
+
+model Message {
+  id        String   @id
+  roomId    String
+  room      Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  playerId  String
+  body      String
+  createdAt DateTime @default(now())
+}
+
+model Word {
+  id         String  @id
+  categoryId String
+  label      String
+  difficulty String
+  locale     String  @default("fr")
+  enabled    Boolean @default(true)
+  rounds     Round[]
+
+  @@unique([label, locale])
+}
+
+model Score {
+  roundId  String
+  round    Round  @relation(fields: [roundId], references: [id], onDelete: Cascade)
+  playerId String
+  points   Int
+  reason   String
+
+  @@id([roundId, playerId])
+}

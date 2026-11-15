@@ -1,0 +1,2702 @@
+[
+  {
+    "id": "fr-1-001",
+    "label": "Naruto",
+    "category": "Animés / mangas",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-002",
+    "label": "One Piece",
+    "category": "Animés / mangas",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-003",
+    "label": "Dragon Ball",
+    "category": "Animés / mangas",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-004",
+    "label": "Pokémon",
+    "category": "Animés / mangas",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-005",
+    "label": "Death Note",
+    "category": "Animés / mangas",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-006",
+    "label": "Demon Slayer",
+    "category": "Animés / mangas",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-007",
+    "label": "L’Attaque des Titans",
+    "category": "Animés / mangas",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-008",
+    "label": "Sailor Moon",
+    "category": "Animés / mangas",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-009",
+    "label": "Yu-Gi-Oh!",
+    "category": "Animés / mangas",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-010",
+    "label": "Doraemon",
+    "category": "Animés / mangas",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-011",
+    "label": "Totoro",
+    "category": "Animés / mangas",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-012",
+    "label": "Akira",
+    "category": "Animés / mangas",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-013",
+    "label": "Bleach",
+    "category": "Animés / mangas",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-014",
+    "label": "Fairy Tail",
+    "category": "Animés / mangas",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-015",
+    "label": "Hunter × Hunter",
+    "category": "Animés / mangas",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-016",
+    "label": "Fullmetal Alchemist",
+    "category": "Animés / mangas",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-017",
+    "label": "Spy × Family",
+    "category": "Animés / mangas",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-018",
+    "label": "My Hero Academia",
+    "category": "Animés / mangas",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-019",
+    "label": "Jujutsu Kaisen",
+    "category": "Animés / mangas",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-020",
+    "label": "One Punch Man",
+    "category": "Animés / mangas",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-021",
+    "label": "Cowboy Bebop",
+    "category": "Animés / mangas",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-022",
+    "label": "Neon Genesis Evangelion",
+    "category": "Animés / mangas",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-023",
+    "label": "Code Geass",
+    "category": "Animés / mangas",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-024",
+    "label": "Tokyo Ghoul",
+    "category": "Animés / mangas",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-025",
+    "label": "Haikyu!!",
+    "category": "Animés / mangas",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-026",
+    "label": "Blue Lock",
+    "category": "Animés / mangas",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-027",
+    "label": "Chainsaw Man",
+    "category": "Animés / mangas",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-028",
+    "label": "Dr. Stone",
+    "category": "Animés / mangas",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-029",
+    "label": "Assassination Classroom",
+    "category": "Animés / mangas",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-030",
+    "label": "Black Clover",
+    "category": "Animés / mangas",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-031",
+    "label": "Vinland Saga",
+    "category": "Animés / mangas",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-032",
+    "label": "Berserk",
+    "category": "Animés / mangas",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-033",
+    "label": "Nana",
+    "category": "Animés / mangas",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-034",
+    "label": "Fruits Basket",
+    "category": "Animés / mangas",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-035",
+    "label": "Your Lie in April",
+    "category": "Animés / mangas",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-036",
+    "label": "Mob Psycho 100",
+    "category": "Animés / mangas",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-037",
+    "label": "Soul Eater",
+    "category": "Animés / mangas",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-038",
+    "label": "Inuyasha",
+    "category": "Animés / mangas",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-039",
+    "label": "Ranma ½",
+    "category": "Animés / mangas",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-040",
+    "label": "Détective Conan",
+    "category": "Animés / mangas",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-041",
+    "label": "Parasyte",
+    "category": "Animés / mangas",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-042",
+    "label": "Monster",
+    "category": "Animés / mangas",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-043",
+    "label": "Pluto",
+    "category": "Animés / mangas",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-044",
+    "label": "Made in Abyss",
+    "category": "Animés / mangas",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-045",
+    "label": "Frieren",
+    "category": "Animés / mangas",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-046",
+    "label": "Mushishi",
+    "category": "Animés / mangas",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-047",
+    "label": "Ergo Proxy",
+    "category": "Animés / mangas",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-048",
+    "label": "Ping Pong the Animation",
+    "category": "Animés / mangas",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-049",
+    "label": "Land of the Lustrous",
+    "category": "Animés / mangas",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-1-050",
+    "label": "March Comes in Like a Lion",
+    "category": "Animés / mangas",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-051",
+    "label": "Titanic",
+    "category": "Films",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-052",
+    "label": "Avatar",
+    "category": "Films",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-053",
+    "label": "Le Roi lion",
+    "category": "Films",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-054",
+    "label": "Jurassic Park",
+    "category": "Films",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-055",
+    "label": "Retour vers le futur",
+    "category": "Films",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-056",
+    "label": "E.T. l’extra-terrestre",
+    "category": "Films",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-057",
+    "label": "Shrek",
+    "category": "Films",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-058",
+    "label": "Le Monde de Nemo",
+    "category": "Films",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-059",
+    "label": "Gladiator",
+    "category": "Films",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-060",
+    "label": "Forrest Gump",
+    "category": "Films",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-061",
+    "label": "Inception",
+    "category": "Films",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-062",
+    "label": "Interstellar",
+    "category": "Films",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-063",
+    "label": "Le Parrain",
+    "category": "Films",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-064",
+    "label": "Matrix",
+    "category": "Films",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-065",
+    "label": "Rocky",
+    "category": "Films",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-066",
+    "label": "Ratatouille",
+    "category": "Films",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-067",
+    "label": "La Reine des neiges",
+    "category": "Films",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-068",
+    "label": "Le Fabuleux Destin d’Amélie Poulain",
+    "category": "Films",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-069",
+    "label": "Les Dents de la mer",
+    "category": "Films",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-070",
+    "label": "Maman, j’ai raté l’avion",
+    "category": "Films",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-071",
+    "label": "Le Truman Show",
+    "category": "Films",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-072",
+    "label": "Pulp Fiction",
+    "category": "Films",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-073",
+    "label": "Fight Club",
+    "category": "Films",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-074",
+    "label": "Parasite",
+    "category": "Films",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-075",
+    "label": "Whiplash",
+    "category": "Films",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-076",
+    "label": "La La Land",
+    "category": "Films",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-077",
+    "label": "Le Voyage de Chihiro",
+    "category": "Films",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-078",
+    "label": "Le Château ambulant",
+    "category": "Films",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-079",
+    "label": "Les Évadés",
+    "category": "Films",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-080",
+    "label": "Intouchables",
+    "category": "Films",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-081",
+    "label": "Les Choristes",
+    "category": "Films",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-082",
+    "label": "Bienvenue chez les Ch’tis",
+    "category": "Films",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-083",
+    "label": "Mad Max: Fury Road",
+    "category": "Films",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-084",
+    "label": "Dune",
+    "category": "Films",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-085",
+    "label": "Blade Runner",
+    "category": "Films",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-086",
+    "label": "Alien",
+    "category": "Films",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-087",
+    "label": "The Grand Budapest Hotel",
+    "category": "Films",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-088",
+    "label": "Le Cinquième Élément",
+    "category": "Films",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-089",
+    "label": "Les Temps modernes",
+    "category": "Films",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-090",
+    "label": "The Dark Knight",
+    "category": "Films",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-091",
+    "label": "Arrival",
+    "category": "Films",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-092",
+    "label": "Memento",
+    "category": "Films",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-093",
+    "label": "Mulholland Drive",
+    "category": "Films",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-094",
+    "label": "Old Boy",
+    "category": "Films",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-095",
+    "label": "Stalker",
+    "category": "Films",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-096",
+    "label": "Metropolis",
+    "category": "Films",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-097",
+    "label": "Les Sept Samouraïs",
+    "category": "Films",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-098",
+    "label": "La Vie des autres",
+    "category": "Films",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-099",
+    "label": "Le Tombeau des lucioles",
+    "category": "Films",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-2-100",
+    "label": "Cinema Paradiso",
+    "category": "Films",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-101",
+    "label": "Minecraft",
+    "category": "Jeux vidéo",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-102",
+    "label": "Fortnite",
+    "category": "Jeux vidéo",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-103",
+    "label": "Tetris",
+    "category": "Jeux vidéo",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-104",
+    "label": "Les Sims",
+    "category": "Jeux vidéo",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-105",
+    "label": "Mario Kart",
+    "category": "Jeux vidéo",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-106",
+    "label": "Animal Crossing",
+    "category": "Jeux vidéo",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-107",
+    "label": "League of Legends",
+    "category": "Jeux vidéo",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-108",
+    "label": "World of Warcraft",
+    "category": "Jeux vidéo",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-109",
+    "label": "Pac-Man",
+    "category": "Jeux vidéo",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-110",
+    "label": "Sonic the Hedgehog",
+    "category": "Jeux vidéo",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-111",
+    "label": "Among Us",
+    "category": "Jeux vidéo",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-112",
+    "label": "Fall Guys",
+    "category": "Jeux vidéo",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-113",
+    "label": "Rocket League",
+    "category": "Jeux vidéo",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-114",
+    "label": "Candy Crush Saga",
+    "category": "Jeux vidéo",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-115",
+    "label": "Wii Sports",
+    "category": "Jeux vidéo",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-116",
+    "label": "Super Mario Odyssey",
+    "category": "Jeux vidéo",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-117",
+    "label": "The Legend of Zelda: Breath of the Wild",
+    "category": "Jeux vidéo",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-118",
+    "label": "Grand Theft Auto V",
+    "category": "Jeux vidéo",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-119",
+    "label": "Roblox",
+    "category": "Jeux vidéo",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-120",
+    "label": "Clash of Clans",
+    "category": "Jeux vidéo",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-121",
+    "label": "Stardew Valley",
+    "category": "Jeux vidéo",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-122",
+    "label": "Hollow Knight",
+    "category": "Jeux vidéo",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-123",
+    "label": "Celeste",
+    "category": "Jeux vidéo",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-124",
+    "label": "Hades",
+    "category": "Jeux vidéo",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-125",
+    "label": "Portal",
+    "category": "Jeux vidéo",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-126",
+    "label": "Half-Life",
+    "category": "Jeux vidéo",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-127",
+    "label": "BioShock",
+    "category": "Jeux vidéo",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-128",
+    "label": "Skyrim",
+    "category": "Jeux vidéo",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-129",
+    "label": "The Witcher 3",
+    "category": "Jeux vidéo",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-130",
+    "label": "Red Dead Redemption 2",
+    "category": "Jeux vidéo",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-131",
+    "label": "Elden Ring",
+    "category": "Jeux vidéo",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-132",
+    "label": "Dark Souls",
+    "category": "Jeux vidéo",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-133",
+    "label": "Overwatch",
+    "category": "Jeux vidéo",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-134",
+    "label": "Valorant",
+    "category": "Jeux vidéo",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-135",
+    "label": "Counter-Strike",
+    "category": "Jeux vidéo",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-136",
+    "label": "Apex Legends",
+    "category": "Jeux vidéo",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-137",
+    "label": "Terraria",
+    "category": "Jeux vidéo",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-138",
+    "label": "Undertale",
+    "category": "Jeux vidéo",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-139",
+    "label": "Cuphead",
+    "category": "Jeux vidéo",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-140",
+    "label": "It Takes Two",
+    "category": "Jeux vidéo",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-141",
+    "label": "Disco Elysium",
+    "category": "Jeux vidéo",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-142",
+    "label": "Outer Wilds",
+    "category": "Jeux vidéo",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-143",
+    "label": "Return of the Obra Dinn",
+    "category": "Jeux vidéo",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-144",
+    "label": "Baba Is You",
+    "category": "Jeux vidéo",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-145",
+    "label": "Inscryption",
+    "category": "Jeux vidéo",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-146",
+    "label": "Slay the Spire",
+    "category": "Jeux vidéo",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-147",
+    "label": "Dead Cells",
+    "category": "Jeux vidéo",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-148",
+    "label": "Subnautica",
+    "category": "Jeux vidéo",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-149",
+    "label": "Factorio",
+    "category": "Jeux vidéo",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-3-150",
+    "label": "Spiritfarer",
+    "category": "Jeux vidéo",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-151",
+    "label": "Friends",
+    "category": "Séries",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-152",
+    "label": "Les Simpson",
+    "category": "Séries",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-153",
+    "label": "Game of Thrones",
+    "category": "Séries",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-154",
+    "label": "Stranger Things",
+    "category": "Séries",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-155",
+    "label": "Breaking Bad",
+    "category": "Séries",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-156",
+    "label": "La Casa de Papel",
+    "category": "Séries",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-157",
+    "label": "Squid Game",
+    "category": "Séries",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-158",
+    "label": "Mercredi",
+    "category": "Séries",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-159",
+    "label": "The Walking Dead",
+    "category": "Séries",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-160",
+    "label": "Prison Break",
+    "category": "Séries",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-161",
+    "label": "The Big Bang Theory",
+    "category": "Séries",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-162",
+    "label": "How I Met Your Mother",
+    "category": "Séries",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-163",
+    "label": "Sherlock",
+    "category": "Séries",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-164",
+    "label": "Lupin",
+    "category": "Séries",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-165",
+    "label": "Kaamelott",
+    "category": "Séries",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-166",
+    "label": "Malcolm",
+    "category": "Séries",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-167",
+    "label": "Doctor Who",
+    "category": "Séries",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-168",
+    "label": "Lost",
+    "category": "Séries",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-169",
+    "label": "Grey’s Anatomy",
+    "category": "Séries",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-170",
+    "label": "Desperate Housewives",
+    "category": "Séries",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-171",
+    "label": "Better Call Saul",
+    "category": "Séries",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-172",
+    "label": "Dark",
+    "category": "Séries",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-173",
+    "label": "Black Mirror",
+    "category": "Séries",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-174",
+    "label": "The Office",
+    "category": "Séries",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-175",
+    "label": "Peaky Blinders",
+    "category": "Séries",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-176",
+    "label": "The Crown",
+    "category": "Séries",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-177",
+    "label": "Succession",
+    "category": "Séries",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-178",
+    "label": "The Last of Us",
+    "category": "Séries",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-179",
+    "label": "The Mandalorian",
+    "category": "Séries",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-180",
+    "label": "The Boys",
+    "category": "Séries",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-181",
+    "label": "Fargo",
+    "category": "Séries",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-182",
+    "label": "True Detective",
+    "category": "Séries",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-183",
+    "label": "Dexter",
+    "category": "Séries",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-184",
+    "label": "House",
+    "category": "Séries",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-185",
+    "label": "Brooklyn Nine-Nine",
+    "category": "Séries",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-186",
+    "label": "Community",
+    "category": "Séries",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-187",
+    "label": "Vikings",
+    "category": "Séries",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-188",
+    "label": "Downton Abbey",
+    "category": "Séries",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-189",
+    "label": "Gossip Girl",
+    "category": "Séries",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-190",
+    "label": "Sex Education",
+    "category": "Séries",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-191",
+    "label": "Severance",
+    "category": "Séries",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-192",
+    "label": "The Wire",
+    "category": "Séries",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-193",
+    "label": "Les Soprano",
+    "category": "Séries",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-194",
+    "label": "Twin Peaks",
+    "category": "Séries",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-195",
+    "label": "The Leftovers",
+    "category": "Séries",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-196",
+    "label": "Mr. Robot",
+    "category": "Séries",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-197",
+    "label": "Fleabag",
+    "category": "Séries",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-198",
+    "label": "Ted Lasso",
+    "category": "Séries",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-199",
+    "label": "The Bear",
+    "category": "Séries",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-4-200",
+    "label": "Utopia",
+    "category": "Séries",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-201",
+    "label": "Michael Jackson",
+    "category": "Musique",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-202",
+    "label": "Madonna",
+    "category": "Musique",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-203",
+    "label": "Beyoncé",
+    "category": "Musique",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-204",
+    "label": "Rihanna",
+    "category": "Musique",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-205",
+    "label": "Taylor Swift",
+    "category": "Musique",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-206",
+    "label": "Daft Punk",
+    "category": "Musique",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-207",
+    "label": "Stromae",
+    "category": "Musique",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-208",
+    "label": "Angèle",
+    "category": "Musique",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-209",
+    "label": "Céline Dion",
+    "category": "Musique",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-210",
+    "label": "Johnny Hallyday",
+    "category": "Musique",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-211",
+    "label": "Édith Piaf",
+    "category": "Musique",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-212",
+    "label": "Queen",
+    "category": "Musique",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-213",
+    "label": "The Beatles",
+    "category": "Musique",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-214",
+    "label": "ABBA",
+    "category": "Musique",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-215",
+    "label": "Bob Marley",
+    "category": "Musique",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-216",
+    "label": "Adele",
+    "category": "Musique",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-217",
+    "label": "Bruno Mars",
+    "category": "Musique",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-218",
+    "label": "Lady Gaga",
+    "category": "Musique",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-219",
+    "label": "Orelsan",
+    "category": "Musique",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-220",
+    "label": "Indochine",
+    "category": "Musique",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-221",
+    "label": "David Bowie",
+    "category": "Musique",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-222",
+    "label": "Prince",
+    "category": "Musique",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-223",
+    "label": "Nirvana",
+    "category": "Musique",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-224",
+    "label": "Metallica",
+    "category": "Musique",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-225",
+    "label": "AC/DC",
+    "category": "Musique",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-226",
+    "label": "Pink Floyd",
+    "category": "Musique",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-227",
+    "label": "Radiohead",
+    "category": "Musique",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-228",
+    "label": "Coldplay",
+    "category": "Musique",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-229",
+    "label": "Muse",
+    "category": "Musique",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-230",
+    "label": "Gorillaz",
+    "category": "Musique",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-231",
+    "label": "Kendrick Lamar",
+    "category": "Musique",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-232",
+    "label": "Eminem",
+    "category": "Musique",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-233",
+    "label": "Amy Winehouse",
+    "category": "Musique",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-234",
+    "label": "Billie Eilish",
+    "category": "Musique",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-235",
+    "label": "Lana Del Rey",
+    "category": "Musique",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-236",
+    "label": "Dua Lipa",
+    "category": "Musique",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-237",
+    "label": "Jacques Brel",
+    "category": "Musique",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-238",
+    "label": "Charles Aznavour",
+    "category": "Musique",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-239",
+    "label": "Mylène Farmer",
+    "category": "Musique",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-240",
+    "label": "MC Solaar",
+    "category": "Musique",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-241",
+    "label": "Björk",
+    "category": "Musique",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-242",
+    "label": "Massive Attack",
+    "category": "Musique",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-243",
+    "label": "Portishead",
+    "category": "Musique",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-244",
+    "label": "Aphex Twin",
+    "category": "Musique",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-245",
+    "label": "Nina Simone",
+    "category": "Musique",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-246",
+    "label": "John Coltrane",
+    "category": "Musique",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-247",
+    "label": "Miles Davis",
+    "category": "Musique",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-248",
+    "label": "Patti Smith",
+    "category": "Musique",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-249",
+    "label": "Ryuichi Sakamoto",
+    "category": "Musique",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-5-250",
+    "label": "Fela Kuti",
+    "category": "Musique",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-251",
+    "label": "Tour Eiffel",
+    "category": "Culture générale",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-252",
+    "label": "Pyramides de Gizeh",
+    "category": "Culture générale",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-253",
+    "label": "Mont Everest",
+    "category": "Culture générale",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-254",
+    "label": "Océan Pacifique",
+    "category": "Culture générale",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-255",
+    "label": "Planète Mars",
+    "category": "Culture générale",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-256",
+    "label": "Système solaire",
+    "category": "Culture générale",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-257",
+    "label": "Volcan",
+    "category": "Culture générale",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-258",
+    "label": "Arc-en-ciel",
+    "category": "Culture générale",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-259",
+    "label": "Boussole",
+    "category": "Culture générale",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-260",
+    "label": "Télescope",
+    "category": "Culture générale",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-261",
+    "label": "Microscope",
+    "category": "Culture générale",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-262",
+    "label": "Électricité",
+    "category": "Culture générale",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-263",
+    "label": "Photosynthèse",
+    "category": "Culture générale",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-264",
+    "label": "Gravité",
+    "category": "Culture générale",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-265",
+    "label": "Démocratie",
+    "category": "Culture générale",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-266",
+    "label": "Renaissance",
+    "category": "Culture générale",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-267",
+    "label": "Révolution française",
+    "category": "Culture générale",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-268",
+    "label": "Jeux olympiques",
+    "category": "Culture générale",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-269",
+    "label": "Échecs",
+    "category": "Culture générale",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-270",
+    "label": "Origami",
+    "category": "Culture générale",
+    "difficulty": "easy",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-271",
+    "label": "Grande Muraille de Chine",
+    "category": "Culture générale",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-272",
+    "label": "Machu Picchu",
+    "category": "Culture générale",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-273",
+    "label": "Colisée",
+    "category": "Culture générale",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-274",
+    "label": "Taj Mahal",
+    "category": "Culture générale",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-275",
+    "label": "Stonehenge",
+    "category": "Culture générale",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-276",
+    "label": "Aurore boréale",
+    "category": "Culture générale",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-277",
+    "label": "Éclipse solaire",
+    "category": "Culture générale",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-278",
+    "label": "Trou noir",
+    "category": "Culture générale",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-279",
+    "label": "Voie lactée",
+    "category": "Culture générale",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-280",
+    "label": "ADN",
+    "category": "Culture générale",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-281",
+    "label": "Atome",
+    "category": "Culture générale",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-282",
+    "label": "Tableau périodique",
+    "category": "Culture générale",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-283",
+    "label": "Mona Lisa",
+    "category": "Culture générale",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-284",
+    "label": "Guernica",
+    "category": "Culture générale",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-285",
+    "label": "La Nuit étoilée",
+    "category": "Culture générale",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-286",
+    "label": "Gutenberg",
+    "category": "Culture générale",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-287",
+    "label": "Marie Curie",
+    "category": "Culture générale",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-288",
+    "label": "Albert Einstein",
+    "category": "Culture générale",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-289",
+    "label": "Léonard de Vinci",
+    "category": "Culture générale",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-290",
+    "label": "Louis Pasteur",
+    "category": "Culture générale",
+    "difficulty": "medium",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-291",
+    "label": "Paradoxe de Fermi",
+    "category": "Culture générale",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-292",
+    "label": "Effet Doppler",
+    "category": "Culture générale",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-293",
+    "label": "Théorème de Pythagore",
+    "category": "Culture générale",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-294",
+    "label": "Suite de Fibonacci",
+    "category": "Culture générale",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-295",
+    "label": "Tectonique des plaques",
+    "category": "Culture générale",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-296",
+    "label": "Pierre de Rosette",
+    "category": "Culture générale",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-297",
+    "label": "Bibliothèque d’Alexandrie",
+    "category": "Culture générale",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-298",
+    "label": "Route de la soie",
+    "category": "Culture générale",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-299",
+    "label": "Mécanisme d’Anticythère",
+    "category": "Culture générale",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  },
+  {
+    "id": "fr-6-300",
+    "label": "Pendule de Foucault",
+    "category": "Culture générale",
+    "difficulty": "hard",
+    "locale": "fr",
+    "enabled": true,
+    "status": "curated"
+  }
+]
