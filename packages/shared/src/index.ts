@@ -6,6 +6,7 @@ export const categories = [
   "Séries",
   "Musique",
   "Culture générale",
+  "YouTube",
 ] as const;
 export const nicknameSchema = z
   .string()

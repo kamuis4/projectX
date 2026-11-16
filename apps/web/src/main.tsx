@@ -34,6 +34,7 @@ import {
   CheckCircle2,
   Target,
   Radio,
+  Youtube,
 } from "lucide-react";
 import {
   categories,
@@ -55,7 +56,7 @@ import {
   StreamOverlay,
 } from "./v2";
 const socket = io({ autoConnect: false, withCredentials: true });
-const icons = [Sparkles, Play, Target, Radio, Volume2, BookOpen];
+const icons = [Sparkles, Play, Target, Radio, Volume2, BookOpen, Youtube];
 function read<T>(key: string): T | null {
   try {
     return JSON.parse(localStorage.getItem(key) ?? "null") as T | null;
@@ -613,7 +614,8 @@ function App() {
                 <h2>À chaque univers, ses secrets.</h2>
               </div>
               <span className="subtle">
-                6 catégories à explorer <ArrowUpRight size={15} />
+                {categories.length} catégories à explorer{" "}
+                <ArrowUpRight size={15} />
               </span>
             </div>
             <div className="category-grid">
@@ -625,7 +627,7 @@ function App() {
                     <Icon size={26} />
                     <strong>{category}</strong>
                     <span>
-                      50 mots <ArrowUpRight size={14} />
+                      80 mots <ArrowUpRight size={14} />
                     </span>
                   </div>
                 );

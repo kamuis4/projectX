@@ -49,6 +49,20 @@ const pack = (labels = ["Soleil", "Lune"]): PackRecord => ({
   },
 });
 describe("V2 · catégories, options et anti-répétition", () => {
+  it("propose YouTube par défaut et démarre avec ce seul univers", () => {
+    const f = fixture();
+    expect(f.room.settings.categories).toContain("YouTube");
+    f.engine.settings(f.room, f.host, {
+      ...f.room.settings,
+      categories: ["YouTube"],
+      subcategories: ["YouTube::Divertissement"],
+      difficulty: "easy",
+    });
+    expect(f.engine.pool(f.room)).toHaveLength(8);
+    f.start();
+    expect(f.room.round!.word.category).toBe("YouTube");
+    expect(f.room.round!.word.subcategory).toBe("Divertissement");
+  });
   it("croise catégories, sous-catégories, difficulté et connaissances des seuls participants", () => {
     const f = fixture();
     f.room.settings = {
@@ -57,7 +71,19 @@ describe("V2 · catégories, options et anti-répétition", () => {
       subcategories: ["Animés / mangas::Isekai"],
       difficulty: "medium",
     };
-    expect(f.engine.pool(f.room).map((w) => w.label)).toEqual(["Inuyasha"]);
+    const compatible = f.engine.pool(f.room).map((w) => w.label);
+    expect(compatible).toContain("Re:Zero");
+    expect(compatible).not.toContain("Inuyasha");
+    expect(
+      f.engine
+        .pool(f.room)
+        .every(
+          (word) =>
+            word.category === "Animés / mangas" &&
+            word.subcategory === "Isekai" &&
+            word.difficulty === "medium",
+        ),
+    ).toBe(true);
     f.engine.preferences(f.room, f.host, ["Films"], []);
     expect(f.engine.pool(f.room)).toHaveLength(0);
     f.engine.preferences(f.room, f.host, [], []);
@@ -69,10 +95,10 @@ describe("V2 · catégories, options et anti-répétition", () => {
       true,
     ).player;
     f.engine.preferences(f.room, spec, ["Musique"], []);
-    expect(f.engine.pool(f.room)).toHaveLength(1);
+    expect(f.engine.pool(f.room)).toHaveLength(compatible.length);
     const view = f.engine.view(f.room);
-    expect(view.availableWords).toBe(1);
-    expect(JSON.stringify(view)).not.toContain("Inuyasha");
+    expect(view.availableWords).toBe(compatible.length);
+    expect(JSON.stringify(view)).not.toContain("Re:Zero");
   });
   it("bloque l’épuisement et exige un reset ou un élargissement explicite", () => {
     const f = fixture();
