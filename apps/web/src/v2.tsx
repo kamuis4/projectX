@@ -239,7 +239,7 @@ export function AdvancedSettings({
             checked={value.includeOfficial}
             onChange={(e) => patch({ includeOfficial: e.target.checked })}
           />
-          Inclure les 300 mots officiels
+          Inclure la banque de mots officielle
         </label>
         <div className="v2-check-grid">
           {availableCategories.map((category) => (

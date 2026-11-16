@@ -1,4 +1,4 @@
-# Liste des 480 mots
+# Liste des 560 mots
 
 Banque proposée dans la PR #4 : 80 mots par catégorie. Les variantes sont des réponses acceptées pour le même mot, pas des mots supplémentaires.
 
@@ -632,3 +632,107 @@ Le classement vise la familiarité supposée auprès d’un public francophone :
 | La Nuit étoilée  | Intermédiaire | —                   |
 | Léonard de Vinci | Intermédiaire | Leonardo da Vinci   |
 | Mona Lisa        | Intermédiaire | —                   |
+
+## YouTube
+
+32 faciles · 32 intermédiaires · 16 difficiles
+
+### Divertissement (20 mots)
+
+| Mot              | Difficulté    | Variantes acceptées |
+| ---------------- | ------------- | ------------------- |
+| Amixem           | Facile        | —                   |
+| Cyprien          | Facile        | —                   |
+| Inoxtag          | Facile        | —                   |
+| McFly et Carlito | Facile        | —                   |
+| Mister V         | Facile        | —                   |
+| Norman           | Facile        | —                   |
+| Rémi Gaillard    | Facile        | —                   |
+| Squeezie         | Facile        | —                   |
+| Joyca            | Intermédiaire | —                   |
+| Kemar            | Intermédiaire | —                   |
+| Le Rire Jaune    | Intermédiaire | —                   |
+| Le Woop          | Intermédiaire | —                   |
+| Ludovik          | Intermédiaire | —                   |
+| Mastu            | Intermédiaire | —                   |
+| Palmashow        | Intermédiaire | —                   |
+| SEB              | Intermédiaire | Seb la Frite        |
+| Bapt&Gaël        | Difficile     | —                   |
+| Guzz Productions | Difficile     | —                   |
+| Studio Bagel     | Difficile     | —                   |
+| Yes vous aime    | Difficile     | —                   |
+
+### Gaming (20 mots)
+
+| Mot               | Difficulté    | Variantes acceptées |
+| ----------------- | ------------- | ------------------- |
+| Domingo           | Facile        | —                   |
+| Gotaga            | Facile        | —                   |
+| Joueur du Grenier | Facile        | JDG                 |
+| Kameto            | Facile        | —                   |
+| Laink et Terracid | Facile        | Wankil Studio       |
+| Michou            | Facile        | —                   |
+| TheKAIRI78        | Facile        | —                   |
+| ZeratoR           | Facile        | —                   |
+| Aypierre          | Intermédiaire | —                   |
+| Bob Lennon        | Intermédiaire | —                   |
+| Brioche           | Intermédiaire | —                   |
+| Fanta             | Intermédiaire | —                   |
+| Frigiel           | Intermédiaire | —                   |
+| Fuze III          | Intermédiaire | —                   |
+| Laupok            | Intermédiaire | —                   |
+| Siphano           | Intermédiaire | —                   |
+| Benzaie           | Difficile     | —                   |
+| Edward            | Difficile     | —                   |
+| NostalGeek        | Difficile     | —                   |
+| Sheshounet        | Difficile     | —                   |
+
+### Sciences et culture (20 mots)
+
+| Mot                      | Difficulté    | Variantes acceptées |
+| ------------------------ | ------------- | ------------------- |
+| DirtyBiology             | Facile        | —                   |
+| Dr Nozman                | Facile        | —                   |
+| e-penser                 | Facile        | —                   |
+| HugoDécrypte             | Facile        | Hugo Décrypte       |
+| Jamy - Epicurieux        | Facile        | Epicurieux          |
+| Linguisticae             | Facile        | —                   |
+| Nota Bene                | Facile        | —                   |
+| ScienceEtonnante         | Facile        | —                   |
+| AstronoGeek              | Intermédiaire | —                   |
+| Axolot                   | Intermédiaire | —                   |
+| C’est une autre histoire | Intermédiaire | —                   |
+| Le Fossoyeur de Films    | Intermédiaire | —                   |
+| Le Vortex                | Intermédiaire | —                   |
+| Les Bons Profs           | Intermédiaire | —                   |
+| Les Revues du Monde      | Intermédiaire | —                   |
+| Scilabus                 | Intermédiaire | —                   |
+| Hygiène Mentale          | Difficile     | —                   |
+| Le Réveilleur            | Difficile     | —                   |
+| Monsieur Phi             | Difficile     | —                   |
+| ScienceClic              | Difficile     | —                   |
+
+### Vie quotidienne et création (20 mots)
+
+| Mot                     | Difficulté    | Variantes acceptées |
+| ----------------------- | ------------- | ------------------- |
+| EnjoyPhoenix            | Facile        | —                   |
+| FastGoodCuisine         | Facile        | —                   |
+| Léna Situations         | Facile        | —                   |
+| Natoo                   | Facile        | —                   |
+| Sananas                 | Facile        | —                   |
+| Sissy Mua               | Facile        | —                   |
+| Swan et Néo             | Facile        | —                   |
+| Tibo InShape            | Facile        | —                   |
+| Chef Michel Dumas       | Intermédiaire | —                   |
+| Coline                  | Intermédiaire | —                   |
+| Hervé Cuisine           | Intermédiaire | —                   |
+| Horia                   | Intermédiaire | —                   |
+| Juste Zoé               | Intermédiaire | —                   |
+| Micode                  | Intermédiaire | —                   |
+| Safia Vendome           | Intermédiaire | —                   |
+| Shera Kerienski         | Intermédiaire | —                   |
+| Alex French Guy Cooking | Difficile     | —                   |
+| Deus Ex Silicium        | Difficile     | —                   |
+| Heliox                  | Difficile     | —                   |
+| La Petite Okara         | Difficile     | —                   |

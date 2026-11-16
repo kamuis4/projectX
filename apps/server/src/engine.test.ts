@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { Engine, normalize } from "./engine";
-import { commands } from "@spyfall/shared";
+import { commands, categories } from "@spyfall/shared";
 import words from "../../../data/words.fr.json";
 function setup(count = 3, double = false) {
   let time = 1000;
@@ -214,6 +214,7 @@ describe("Moteur autoritaire", () => {
     ).toBe(false);
   });
   it("contient 80 mots uniques par catégorie et couvre chaque difficulté", () => {
+    expect(new Set(words.map((w) => w.category))).toEqual(new Set(categories));
     expect(new Set(words.map((w) => w.id)).size).toBe(words.length);
     const labels = words.flatMap((w) => [
       ...new Set([w.label, ...w.variants].map(normalize)),

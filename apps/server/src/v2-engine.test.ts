@@ -49,6 +49,20 @@ const pack = (labels = ["Soleil", "Lune"]): PackRecord => ({
   },
 });
 describe("V2 · catégories, options et anti-répétition", () => {
+  it("propose YouTube par défaut et démarre avec ce seul univers", () => {
+    const f = fixture();
+    expect(f.room.settings.categories).toContain("YouTube");
+    f.engine.settings(f.room, f.host, {
+      ...f.room.settings,
+      categories: ["YouTube"],
+      subcategories: ["YouTube::Divertissement"],
+      difficulty: "easy",
+    });
+    expect(f.engine.pool(f.room)).toHaveLength(8);
+    f.start();
+    expect(f.room.round!.word.category).toBe("YouTube");
+    expect(f.room.round!.word.subcategory).toBe("Divertissement");
+  });
   it("croise catégories, sous-catégories, difficulté et connaissances des seuls participants", () => {
     const f = fixture();
     f.room.settings = {
