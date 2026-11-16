@@ -349,6 +349,15 @@ function App() {
   const me = room?.players.find((p) => p.id === session?.playerId);
   const host = !!me && room?.hostPlayerId === me.id;
   const activePlayers = room?.players.filter((p) => !p.spectator) ?? [];
+  const settingsChanged =
+    !!settings &&
+    !!room &&
+    JSON.stringify(settings) !== JSON.stringify(room.settings);
+  const saveSettings = async () => {
+    if (settings && (await send("room:settings:update", settings))) {
+      setNotice("Règles enregistrées. Chaque joueur doit se déclarer prêt.");
+    }
+  };
   const chatAllowed =
     !!room &&
     ["lobby", "discussion", "results"].includes(room.phase) &&
@@ -891,22 +900,36 @@ function App() {
                         <Button
                           disabled={
                             pending ||
-                            room.tournamentFinished ||
-                            room.remainingWords === 0 ||
-                            activePlayers.length <
-                              spiesFor(room.settings) * 3 ||
-                            !activePlayers.every(
-                              (p) => p.ready && p.connected,
-                            ) ||
-                            JSON.stringify(settings) !==
-                              JSON.stringify(room.settings)
+                            (settingsChanged
+                              ? !settings?.categories.length
+                              : room.tournamentFinished ||
+                                room.remainingWords === 0 ||
+                                activePlayers.length <
+                                  spiesFor(room.settings) * 3 ||
+                                !activePlayers.every(
+                                  (p) => p.ready && p.connected,
+                                ))
                           }
-                          onClick={() => void send("game:start")}
+                          onClick={() =>
+                            void (settingsChanged
+                              ? saveSettings()
+                              : send("game:start"))
+                          }
                         >
-                          Lancer la partie <Play size={16} />
+                          {settingsChanged
+                            ? "Appliquer les règles"
+                            : "Lancer la partie"}{" "}
+                          <Play size={16} />
                         </Button>
                       )}
                     </div>
+                    {host && (
+                      <small role="status">
+                        {settingsChanged
+                          ? "Appliquez les règles modifiées, puis chaque joueur doit se déclarer prêt. Une seule catégorie sélectionnée suffit."
+                          : "Chaque joueur doit se déclarer prêt après une modification des règles."}
+                      </small>
+                    )}
                     {!host && (
                       <small>
                         L’hôte lancera la partie quand tout le monde sera prêt.
