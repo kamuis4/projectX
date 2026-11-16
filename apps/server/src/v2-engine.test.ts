@@ -49,6 +49,22 @@ const pack = (labels = ["Soleil", "Lune"]): PackRecord => ({
   },
 });
 describe("V2 · catégories, options et anti-répétition", () => {
+  it("démarre avec une seule catégorie et un nombre de manches modifié après confirmation des joueurs", () => {
+    const f = fixture();
+    f.ready();
+    f.engine.settings(f.room, f.host, {
+      ...f.room.settings,
+      categories: ["Animés / mangas"],
+      rounds: 3,
+    });
+    expect(f.room.players.every((player) => !player.ready)).toBe(true);
+    expect(() => f.engine.start(f.room, f.host)).toThrow("prêts");
+    f.ready();
+    f.engine.start(f.room, f.host);
+    expect(f.room.phase).toBe("reveal");
+    expect(f.room.round!.word.category).toBe("Animés / mangas");
+    expect(f.room.settings.rounds).toBe(3);
+  });
   it("croise catégories, sous-catégories, difficulté et connaissances des seuls participants", () => {
     const f = fixture();
     f.room.settings = {
