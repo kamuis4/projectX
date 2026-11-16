@@ -58,7 +58,8 @@ describe("V2 · catégories, options et anti-répétition", () => {
       difficulty: "medium",
     };
     const compatible = f.engine.pool(f.room).map((w) => w.label);
-    expect(compatible).toContain("Inuyasha");
+    expect(compatible).toContain("Re:Zero");
+    expect(compatible).not.toContain("Inuyasha");
     expect(
       f.engine
         .pool(f.room)
@@ -83,7 +84,7 @@ describe("V2 · catégories, options et anti-répétition", () => {
     expect(f.engine.pool(f.room)).toHaveLength(compatible.length);
     const view = f.engine.view(f.room);
     expect(view.availableWords).toBe(compatible.length);
-    expect(JSON.stringify(view)).not.toContain("Inuyasha");
+    expect(JSON.stringify(view)).not.toContain("Re:Zero");
   });
   it("bloque l’épuisement et exige un reset ou un élargissement explicite", () => {
     const f = fixture();
