@@ -57,7 +57,18 @@ describe("V2 · catégories, options et anti-répétition", () => {
       subcategories: ["Animés / mangas::Isekai"],
       difficulty: "medium",
     };
-    expect(f.engine.pool(f.room).map((w) => w.label)).toEqual(["Inuyasha"]);
+    const compatible = f.engine.pool(f.room).map((w) => w.label);
+    expect(compatible).toContain("Inuyasha");
+    expect(
+      f.engine
+        .pool(f.room)
+        .every(
+          (word) =>
+            word.category === "Animés / mangas" &&
+            word.subcategory === "Isekai" &&
+            word.difficulty === "medium",
+        ),
+    ).toBe(true);
     f.engine.preferences(f.room, f.host, ["Films"], []);
     expect(f.engine.pool(f.room)).toHaveLength(0);
     f.engine.preferences(f.room, f.host, [], []);
@@ -69,9 +80,9 @@ describe("V2 · catégories, options et anti-répétition", () => {
       true,
     ).player;
     f.engine.preferences(f.room, spec, ["Musique"], []);
-    expect(f.engine.pool(f.room)).toHaveLength(1);
+    expect(f.engine.pool(f.room)).toHaveLength(compatible.length);
     const view = f.engine.view(f.room);
-    expect(view.availableWords).toBe(1);
+    expect(view.availableWords).toBe(compatible.length);
     expect(JSON.stringify(view)).not.toContain("Inuyasha");
   });
   it("bloque l’épuisement et exige un reset ou un élargissement explicite", () => {

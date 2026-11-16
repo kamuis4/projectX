@@ -43,7 +43,7 @@ pnpm db:seed
 pnpm dev
 ```
 
-Les migrations initialisent le schéma V1 puis ajoutent les champs et la bibliothèque V2. Le seed charge les 300 mots officiels avec leurs sous-catégories, difficultés et variantes.
+Les migrations initialisent le schéma V1 puis ajoutent les champs et la bibliothèque V2. Le seed charge les 480 mots officiels avec leurs sous-catégories, difficultés et variantes.
 
 ### Mettre à jour une base V1 existante
 
@@ -194,4 +194,4 @@ Le serveur sert le build React depuis `apps/web/dist` sur <http://localhost:3001
 
 Les salons actifs et les liens OBS restent **en mémoire, sur une seule instance** : un redémarrage les perd. PostgreSQL conserve comptes, bibliothèque et résultats terminés, sans restaurer une manche active. Prévoir Redis, reprise, sauvegardes et monitoring avant montée en charge. Sans base, la bibliothèque disparaît aussi au redémarrage.
 
-La banque de 300 mots, ses sous-catégories et ses variantes demandent une relecture éditoriale humaine avant ouverture publique. La recette visuelle multi-navigateurs et OBS n’est pas automatisée dans cette livraison. Le signalement/modération du chat, récupération de mot de passe, vérification d’e-mail, export RGPD de compte, modes infiltré/chaos et création de succès restent hors des fonctionnalités livrées. Adapter les mentions légales à l’exploitant ; les identifiants Docker sont uniquement locaux.
+La banque de 480 mots, ses sous-catégories et ses variantes demandent une relecture éditoriale humaine avant ouverture publique. La recette visuelle multi-navigateurs et OBS n’est pas automatisée dans cette livraison. Le signalement/modération du chat, récupération de mot de passe, vérification d’e-mail, export RGPD de compte, modes infiltré/chaos et création de succès restent hors des fonctionnalités livrées. Adapter les mentions légales à l’exploitant ; les identifiants Docker sont uniquement locaux.
