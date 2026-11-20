@@ -17,6 +17,7 @@ import {
   type Ack,
 } from "@spyfall/shared";
 import { registerLibrary } from "./library";
+import { registerParty } from "./party-server";
 import { Engine, GameError, hash, type Player, type Room } from "./engine";
 
 export async function createServer(
@@ -48,6 +49,7 @@ export async function createServer(
     allowRequest: (req, cb) =>
       cb(null, !req.headers.origin || req.headers.origin === origin),
   });
+  const party = registerParty(io);
   const accountInput = z.object({
     email: z
       .string()
@@ -699,10 +701,11 @@ export async function createServer(
     );
   }
   app.addHook("onClose", async () => {
+    party.close();
     clearInterval(tick);
     clearInterval(cleanup);
     await new Promise<void>((resolve) => io.close(() => resolve()));
     await db?.$disconnect();
   });
-  return { app, io, engine };
+  return { app, io, engine, partyEngine: party.engine };
 }
