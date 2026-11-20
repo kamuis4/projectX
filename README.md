@@ -1,6 +1,6 @@
-# projectX — Spyfall Universe V2
+# Project X — Hub de jeux entre amis
 
-Jeu de déduction en français pour **3 à 12 participants**, avec jusqu’à **50 spectateurs**, chat temps réel et vocal Discord externe. React/Vite/Tailwind, Fastify/Socket.IO, TypeScript et PostgreSQL/Prisma facultatif.
+Hub multijoueur en français : **Spyfall**, **Wavelength**, **La Grande Enchère** et **Prends ou laisse**. React/Vite/Tailwind, Fastify/Socket.IO, TypeScript et PostgreSQL/Prisma facultatif. Les trois nouveaux jeux accueillent **2 à 8 joueurs** ; Spyfall conserve ses **3 à 12 participants**, ses spectateurs et ses fonctionnalités V2.
 
 La [comparaison détaillée V1 → V2](docs/COMPARAISON_V2.md) reprend chaque exigence de l’annexe du PDF, les changements, les décisions et les limites. La V2 prolonge le code de la branche `spyfall/mvp` ; elle ne nécessite aucun service Sites et n’effectue aucun déploiement public.
 
@@ -17,9 +17,21 @@ pnpm dev
 
 Interface : <http://localhost:5173> ; API de santé : <http://localhost:3001/api/health>.
 
-Ouvrir trois profils de navigateur distincts, choisir trois pseudos, créer un salon et partager son code/lien. Tous les participants doivent se déclarer prêts avant le lancement. Les onglets du même profil partagent la session et une seule connexion par identité est autorisée. Sans base de données, les comptes sont explicitement indisponibles et la bibliothèque privée fonctionne **en mémoire**.
+Depuis le hub, choisir un jeu puis créer une table et partager son code/lien. Ouvrir au moins deux profils de navigateur distincts pour les nouveaux jeux. Pour Spyfall, utiliser trois profils ; tous les participants doivent se déclarer prêts avant le lancement. Les onglets du même profil partagent la session et une seule connexion par identité est autorisée. Sans base de données, les comptes sont explicitement indisponibles et la bibliothèque privée fonctionne **en mémoire**.
 
 Le serveur charge `.env` à la racine s’il existe. Vite relaie `/api` et `/socket.io` ; aucun secret de base de données ni banque de mots n’est embarqué dans le client.
+
+## Hub et nouveaux jeux
+
+L’accueil `/` présente les quatre jeux. Spyfall reste accessible via `/?game=spyfall` ; les anciens liens `/?salon=CODE` et les liens OBS continuent de fonctionner. Les nouveaux salons utilisent un code commençant par `H` et un lien `/?party=CODE`. L’hôte peut enchaîner les trois nouveaux jeux dans la même table après un retour au salon. Spyfall garde son moteur et ses salons V2.
+
+- **Wavelength** : adaptation avec estimations individuelles. Un guide voit une cible entre 0 et 100 et envoie un indice. Les autres valident chacun une estimation secrète. Écart absolu ≤ 4 : 4 points ; ≤ 10 : 3 points ; ≤ 18 : 2 points ; au-delà : 0. Le guide gagne la moyenne arrondie des points. Deux tours comme guide par joueur, puis classement final et égalités partagées.
+- **La Grande Enchère** : 100 crédits, cinq personnages par joueur. Le joueur qui tire ouvre automatiquement à 10. Chaque surenchère doit être un entier supérieur à l’offre actuelle ; passer est définitif pour la carte. Dix crédits restent réservés pour chaque futur personnage. Une enchère se termine dès qu’aucun autre joueur ne peut ou ne veut surenchérir. Les équipes complètes ne participent plus aux achats. À la fin, vote secret selon le thème choisi au lobby : bagarre, intelligence ou style. À deux, les deux équipes sont proposées au vote pour permettre un verdict commun ; à partir de trois joueurs, le vote pour soi est interdit. Chaque vote rapporte un point ; égalités partagées. Les statistiques des personnages sont indicatives et éditoriales, le vote tranche.
+- **Prends ou laisse** : un détenteur voit une carte personnage avec une valeur de 1 à 10. Le joueur suivant choisit deux questions distinctes parmi six caractéristiques ; le détenteur révèle chaque réponse calculée par le serveur. Il ne peut pas mentir. Après deux réponses, le destinataire prend ou laisse la carte. Son bénéficiaire gagne la valeur. Deux tours comme détenteur par joueur, le plus grand total gagne. Les autres observent puis jouent à leur tour.
+
+Les nouvelles tables sont invitées et **en mémoire** : aucun score de ces jeux n’est écrit dans les comptes Spyfall, et un redémarrage serveur les efface. Leurs jetons de session sont stockés localement et hachés sur le serveur. Une actualisation reprend le salon, une seconde connexion remplace la première. Une déconnexion suspend les actions pendant au plus 90 secondes, avec transfert de l’hôte. Retirer ou laisser expirer un absent, ou quitter une partie, remet la table au lobby et les scores à zéro ; les autres joueurs restent réunis. L’interface demande confirmation avant un départ ou une remise à zéro. Les salons inactifs expirent après une heure. Le vocal reste externe.
+
+Les 64 cartes de personnages sont définies côté serveur dans `apps/server/src/party-content.ts`. Les cibles, estimations avant résultat, votes avant dépouillement et cartes secrètes ne sont jamais envoyés aux autres joueurs. Les nouveaux événements utilisent le namespace Socket.IO `/party`, avec validation stricte des commandes, contrôle des rôles et limitation de fréquence.
 
 ## PostgreSQL : installation neuve
 

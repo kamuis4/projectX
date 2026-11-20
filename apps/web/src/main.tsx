@@ -47,6 +47,7 @@ import {
   type Command,
 } from "@spyfall/shared";
 import "./styles.css";
+import { PartyHub, SpyfallFrame } from "./party";
 import {
   AdvancedSettings,
   Preferences,
@@ -1568,5 +1569,14 @@ const overlayToken =
   new URLSearchParams(location.hash.slice(1)).get("overlay") ??
   new URLSearchParams(location.search).get("overlay");
 createRoot(document.getElementById("root")!).render(
-  overlayToken ? <StreamOverlay token={overlayToken} /> : <App />,
+  overlayToken ? (
+    <StreamOverlay token={overlayToken} />
+  ) : new URLSearchParams(location.search).get("game") === "spyfall" ||
+    new URLSearchParams(location.search).has("salon") ? (
+    <SpyfallFrame>
+      <App />
+    </SpyfallFrame>
+  ) : (
+    <PartyHub />
+  ),
 );
